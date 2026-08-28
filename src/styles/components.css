@@ -1,0 +1,304 @@
+/* =========================================
+   FAQ ACCORDION (High-Contrast Architectural Editorial)
+   ========================================= */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  overflow: hidden;
+  transition: background-color 0.2s ease;
+}
+
+.faq-item:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem 0.5rem;
+  text-align: left;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #111315;
+}
+
+.faq-toggle-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+  color: #111315;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.faq-item.open .faq-toggle-icon {
+  transform: rotate(180deg);
+  background: #111315;
+  color: #ffffff;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+  padding: 0 0.5rem;
+  color: #383c45;
+  font-size: 0.975rem;
+  line-height: 1.7;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 400px;
+  padding: 0 0.5rem 1.5rem 0.5rem;
+}
+
+/* =========================================
+   COMPARISON TABLE (Architectural Light Theme)
+   ========================================= */
+.comparison-container {
+  overflow-x: auto;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 580px;
+}
+
+.comparison-table th {
+  padding: 1.25rem 1.5rem;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.comparison-table th.col-feature {
+  width: 38%;
+  background: rgba(0, 0, 0, 0.02);
+  color: #111315;
+}
+
+.comparison-table th.col-gn {
+  width: 32%;
+  background: rgba(184, 138, 118, 0.12);
+  color: #8c5b46;
+  border-left: 1px solid rgba(184, 138, 118, 0.2);
+  border-right: 1px solid rgba(184, 138, 118, 0.2);
+}
+
+.comparison-table th.col-traditional {
+  width: 30%;
+  background: rgba(0, 0, 0, 0.04);
+  color: #717580;
+}
+
+.comparison-table td {
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.95rem;
+  color: #555964;
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table td.col-gn {
+  background: rgba(184, 138, 118, 0.05);
+  font-weight: 600;
+  color: #111315;
+  border-left: 1px solid rgba(184, 138, 118, 0.15);
+  border-right: 1px solid rgba(184, 138, 118, 0.15);
+}
+
+.comparison-table td.col-traditional {
+  color: #717580;
+}
+
+.check-icon {
+  color: #10B981;
+  margin-right: 0.4rem;
+  font-weight: bold;
+}
+
+.cross-icon {
+  color: #EF4444;
+  margin-right: 0.4rem;
+  font-weight: bold;
+}
+
+/* =========================================
+   MODALS (Architectural Light Theme)
+   ========================================= */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 18, 24, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.open {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555964;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: #111315;
+}
+
+/* =========================================
+   CINEMATIC FOOTER SYSTEM
+   ========================================= */
+.cinematic-footer-wrapper {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes footer-breathe {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+}
+
+@keyframes footer-scroll-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes footer-heartbeat {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.5)); }
+  15%, 45% { transform: scale(1.25); filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.8)); }
+  30% { transform: scale(1); }
+}
+
+.animate-footer-breathe {
+  animation: footer-breathe 8s ease-in-out infinite alternate;
+}
+
+.animate-footer-scroll-marquee {
+  animation: footer-scroll-marquee 35s linear infinite;
+}
+
+.animate-footer-heartbeat {
+  animation: footer-heartbeat 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+/* Theme-adaptive Grid Background */
+.footer-bg-grid {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+}
+
+/* Charcoal / Copper Aurora Glow */
+.footer-aurora {
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(184, 138, 118, 0.25) 0%, 
+    rgba(239, 187, 165, 0.1) 40%, 
+    transparent 70%
+  );
+}
+
+/* Glass Pill Theming */
+.footer-glass-pill {
+  background: linear-gradient(145deg, rgba(32, 38, 50, 0.9) 0%, rgba(20, 24, 32, 0.95) 100%);
+  box-shadow: 
+      0 10px 30px -10px rgba(0, 0, 0, 0.6), 
+      inset 0 1px 1px rgba(255, 255, 255, 0.15), 
+      inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-glass-pill:hover {
+  background: linear-gradient(145deg, rgba(42, 50, 65, 0.95) 0%, rgba(28, 34, 46, 0.95) 100%);
+  border-color: rgba(239, 187, 165, 0.4);
+  box-shadow: 
+      0 20px 40px -10px rgba(0, 0, 0, 0.8), 
+      0 0 20px rgba(239, 187, 165, 0.2),
+      inset 0 1px 1px rgba(239, 187, 165, 0.3);
+  color: #ffffff;
+}
+
+/* Giant Background Text Masking: GN INVESTMENTS */
+.footer-giant-bg-text {
+  font-size: clamp(3rem, 16vw, 19vw);
+  line-height: 0.85;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(239, 187, 165, 0.14) 45%, transparent 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-transform: uppercase;
+}
+
+/* Metallic Text Glow */
+.footer-text-glow {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(239, 187, 165, 0.85) 60%, rgba(184, 138, 118, 0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0px 0px 25px rgba(239, 187, 165, 0.2));
+}
