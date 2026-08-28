@@ -2,13 +2,17 @@ export function renderHeader() {
   return `
     <header class="fixed top-0 inset-x-0 z-50 bg-[#f7f6f2]/90 backdrop-blur-2xl border-b border-black/8 pt-safe transition-all shadow-xs">
       <div class="h-16 sm:h-20 px-4 sm:px-8 flex items-center justify-between max-w-7xl mx-auto w-full">
-        <!-- Official Logo (Directly on Navbar) -->
-        <a href="#home" class="flex items-center group shrink-0 py-1" data-nav="home" title="G&N Investment - Home">
+        <!-- Official Logo with Enhanced Brand Presence -->
+        <a href="#home" class="flex items-center gap-3 group shrink-0 py-1" data-nav="home" title="G&N Investment - Home">
           <img 
             alt="G&N Investment Logo" 
-            class="h-9 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_1px_4px_rgba(0,0,0,0.15)]" 
+            class="h-10 sm:h-13 w-auto object-contain transition-transform duration-200 group-hover:scale-105 filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.12)]" 
             src="/images/gn-logo-transparent.png" 
           />
+          <div class="hidden sm:flex flex-col">
+            <span class="text-sm sm:text-base font-black tracking-tight text-[#111315] font-['Playfair_Display',serif] leading-tight group-hover:text-[#b88a76] transition-colors">G&amp;N INVESTMENT</span>
+            <span class="text-[8.5px] sm:text-[9.5px] font-mono tracking-widest uppercase text-[#b88a76] font-extrabold">DIRECT REAL ESTATE CAPITAL</span>
+          </div>
         </a>
 
         <!-- Desktop Nav Links -->

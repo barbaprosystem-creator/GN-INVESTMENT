@@ -46,9 +46,21 @@ export function renderHomePage() {
           <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent pointer-events-none"></div>
           <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent pointer-events-none"></div>
 
-          <!-- Giant Monumental Typography: "DREEM STUDIO" / "GN INVESTMENTS" (WHITE TYPOGRAPHY / ALIGNED TO THE LEFT) -->
+          <!-- Giant Monumental Typography with Official Logo Seal (WHITE TYPOGRAPHY / ALIGNED TO THE LEFT) -->
           <div class="absolute top-2 sm:top-6 md:top-10 inset-x-0 z-10 max-w-7xl mx-auto w-full px-4 sm:px-10 flex flex-col items-start text-left">
             
+            <!-- Official G&N Brand Seal Tag -->
+            <div class="animate-blur-in flex items-center gap-2.5 mb-1.5 sm:mb-2 bg-black/45 backdrop-blur-md px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-white/20 shadow-xl">
+              <img 
+                src="/images/gn-logo-transparent.png" 
+                alt="G&N Investment Emblem" 
+                class="h-5 sm:h-7 w-auto object-contain filter drop-shadow-[0_2px_6px_rgba(239,187,165,0.5)]" 
+              />
+              <span class="text-[8.5px] sm:text-[10.5px] font-mono font-bold uppercase tracking-widest text-[#efbba5]">
+                G&amp;N INVESTMENT • DIRECT CAPITAL EST. 2026
+              </span>
+            </div>
+
             <div class="animate-blur-in text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-none font-['Playfair_Display',serif] filter drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
               GN INVESTMENTS
             </div>

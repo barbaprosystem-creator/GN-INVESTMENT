@@ -54,6 +54,15 @@ export function renderFooter() {
         <!-- 2. Main Center Content -->
         <div class="relative z-10 flex flex-1 flex-col items-center justify-center px-4 sm:px-6 my-auto w-full max-w-5xl mx-auto text-center">
           
+          <!-- Monumental Glowing Brand Seal -->
+          <div class="mb-4 flex flex-col items-center group">
+            <img 
+              src="/images/gn-logo-transparent.png" 
+              alt="G&N Investment Official Emblem" 
+              class="h-16 sm:h-24 w-auto object-contain filter drop-shadow-[0_0_30px_rgba(239,187,165,0.4)] transition-transform duration-500 group-hover:scale-105" 
+            />
+          </div>
+
           <span id="footerBadge" class="text-xs font-mono uppercase tracking-widest text-[#efbba5] font-bold mb-3 inline-flex items-center gap-2 bg-[#181c26]/90 px-4 py-1.5 rounded-full border border-white/10 shadow-lg">
             <span class="status-dot"></span> NEXT STEPS // KENTUCKY REAL ESTATE
           </span>
