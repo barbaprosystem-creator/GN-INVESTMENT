@@ -74,14 +74,17 @@ export default {
         "gutter": "24px"
       },
       fontFamily: {
-        "body-lg": ["Hanken Grotesk", "sans-serif"],
-        "label-md": ["Hanken Grotesk", "sans-serif"],
-        "body-md": ["Hanken Grotesk", "sans-serif"],
-        "headline-md": ["Libre Caslon Text", "serif"],
-        "headline-lg-mobile": ["Libre Caslon Text", "serif"],
-        "headline-lg": ["Libre Caslon Text", "serif"],
-        "title-lg": ["Hanken Grotesk", "sans-serif"],
-        "display-lg": ["Libre Caslon Text", "serif"]
+        "serif": ["Newsreader", "Playfair Display", "Lora", "Georgia", "serif"],
+        "sans": ["Newsreader", "Lora", "Georgia", "serif"],
+        "mono": ["Space Grotesk", "monospace"],
+        "body-lg": ["Newsreader", "Lora", "serif"],
+        "label-md": ["Space Grotesk", "monospace"],
+        "body-md": ["Newsreader", "Lora", "serif"],
+        "headline-md": ["Playfair Display", "Libre Caslon Text", "serif"],
+        "headline-lg-mobile": ["Playfair Display", "Libre Caslon Text", "serif"],
+        "headline-lg": ["Playfair Display", "Libre Caslon Text", "serif"],
+        "title-lg": ["Playfair Display", "Newsreader", "serif"],
+        "display-lg": ["Playfair Display", "Libre Caslon Text", "serif"]
       },
       fontSize: {
         "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],

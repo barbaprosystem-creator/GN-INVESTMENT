@@ -5,7 +5,7 @@ export function renderAboutPage() {
       <!-- Editorial Top Banner (Constrained Header) -->
       <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 pt-4 pb-8 flex flex-col gap-3">
         <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ ABOUT G&amp;N INVESTMENT ]</span>
-        <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif] leading-none">
+        <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif] leading-none">
           PROFESSIONAL <span class="text-[#b88a76]">/</span> LOCAL <span class="text-[#b88a76]">/</span> DIRECT
         </h1>
         <p class="text-base sm:text-lg text-[#555964] max-w-xl leading-relaxed">
@@ -26,28 +26,28 @@ export function renderAboutPage() {
       <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 flex flex-col gap-6 mb-16">
         <div class="text-left reveal">
           <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ 01 // CORE PILLARS ]</span>
-          <h2 class="text-2xl sm:text-4xl font-black uppercase tracking-tight text-[#111315] mt-1 font-['Plus_Jakarta_Sans',sans-serif]">THE G&amp;N STANDARD</h2>
+          <h2 class="text-2xl sm:text-4xl font-black uppercase tracking-tight text-[#111315] mt-1 font-['Playfair_Display',serif]">THE G&amp;N STANDARD</h2>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-4 border-t border-black/10">
           <!-- Pillar 1 -->
           <div class="reveal delay-100 flex flex-col gap-2">
             <span class="text-xs font-mono font-bold text-[#b88a76]">01. SPEED</span>
-            <h3 class="font-bold text-lg text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">Swift Execution</h3>
+            <h3 class="font-bold text-lg text-[#111315] font-['Playfair_Display',serif]">Swift Execution</h3>
             <p class="text-sm text-[#555964] leading-relaxed">Direct private capital. No mortgage lender approval delays or retail appraisals.</p>
           </div>
 
           <!-- Pillar 2 -->
           <div class="reveal delay-200 flex flex-col gap-2">
             <span class="text-xs font-mono font-bold text-[#b88a76]">02. CLARITY</span>
-            <h3 class="font-bold text-lg text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">Absolute Clarity</h3>
+            <h3 class="font-bold text-lg text-[#111315] font-['Playfair_Display',serif]">Absolute Clarity</h3>
             <p class="text-sm text-[#555964] leading-relaxed">Zero hidden fees, 0% agent commission, and full transparency throughout.</p>
           </div>
 
           <!-- Pillar 3 -->
           <div class="reveal delay-300 flex flex-col gap-2">
             <span class="text-xs font-mono font-bold text-[#b88a76]">03. INTEGRITY</span>
-            <h3 class="font-bold text-lg text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">Fair Valuation</h3>
+            <h3 class="font-bold text-lg text-[#111315] font-['Playfair_Display',serif]">Fair Valuation</h3>
             <p class="text-sm text-[#555964] leading-relaxed">Maximized equity payout based on real current Kentucky market dynamics.</p>
           </div>
         </div>
@@ -61,7 +61,7 @@ export function renderAboutPage() {
       <!-- Local Commitment Text (Constrained) -->
       <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 flex flex-col gap-4 mb-16">
         <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ 02 // LOCAL EXPERTISE ]</span>
-        <h3 class="text-3xl sm:text-4xl font-black text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">Deep Kentucky Roots</h3>
+        <h3 class="text-3xl sm:text-4xl font-black text-[#111315] font-['Playfair_Display',serif]">Deep Kentucky Roots</h3>
         <p class="text-base text-[#555964] leading-relaxed max-w-3xl">
           We live and operate right here in the Commonwealth. From Jefferson County and Louisville Metro to Lexington and surrounding communities, we understand neighborhood micro-markets intimately.
         </p>

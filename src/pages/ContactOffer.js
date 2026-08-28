@@ -4,7 +4,7 @@ export function renderContactOfferPage() {
       <!-- Title Header -->
       <div class="pt-4 pb-6 flex flex-col gap-2 text-center reveal">
         <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ 24-HOUR VALUATION ]</span>
-        <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">
+        <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
           GET YOUR DIRECT OFFER
         </h1>
         <p class="text-sm sm:text-base text-[#555964] max-w-md mx-auto leading-relaxed">
@@ -17,7 +17,7 @@ export function renderContactOfferPage() {
         <div class="reveal delay-100 bg-white rounded-3xl p-6 sm:p-8 border border-black/8 shadow-md flex flex-col gap-4">
           <div class="flex items-center gap-2.5 border-b border-black/8 pb-3">
             <span class="material-symbols-outlined text-[#b88a76] text-[22px]">home</span>
-            <h2 class="font-bold text-base sm:text-lg text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">1. Property Information</h2>
+            <h2 class="font-bold text-base sm:text-lg text-[#111315] font-['Playfair_Display',serif]">1. Property Information</h2>
           </div>
 
           <div class="flex flex-col gap-3.5">
@@ -98,7 +98,7 @@ export function renderContactOfferPage() {
         <div class="reveal delay-200 bg-white rounded-3xl p-6 sm:p-8 border border-black/8 shadow-md flex flex-col gap-4">
           <div class="flex items-center gap-2.5 border-b border-black/8 pb-3">
             <span class="material-symbols-outlined text-[#b88a76] text-[22px]">person</span>
-            <h2 class="font-bold text-base sm:text-lg text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">2. Your Contact Information</h2>
+            <h2 class="font-bold text-base sm:text-lg text-[#111315] font-['Playfair_Display',serif]">2. Your Contact Information</h2>
           </div>
 
           <div class="flex flex-col gap-3.5">

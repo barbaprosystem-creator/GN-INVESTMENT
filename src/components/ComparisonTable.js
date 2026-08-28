@@ -42,7 +42,7 @@ export function renderComparisonTable() {
           <div class="flex items-center justify-between border-b border-black/8 pb-3">
             <div>
               <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-[#b88a76]">DIRECT CAPITAL</span>
-              <h3 class="text-xl font-black text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">G&amp;N Investment</h3>
+              <h3 class="text-xl font-black text-[#111315] font-['Playfair_Display',serif]">G&amp;N Investment</h3>
             </div>
             <span class="bg-[#111315] text-white text-[10px] font-mono font-bold px-3 py-1 rounded-full uppercase">
               RECOMMENDED
@@ -67,7 +67,7 @@ export function renderComparisonTable() {
           <div class="flex items-center justify-between border-b border-black/8 pb-3">
             <div>
               <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-[#717580]">TRADITIONAL ROUTE</span>
-              <h3 class="text-xl font-bold text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">MLS Real Estate Agent</h3>
+              <h3 class="text-xl font-bold text-[#111315] font-['Playfair_Display',serif]">MLS Real Estate Agent</h3>
             </div>
             <span class="bg-black/10 text-[#555964] text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase">
               Standard MLS

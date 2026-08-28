@@ -47,7 +47,7 @@ export function renderSituationsPage() {
       <!-- Title Header (Constrained) -->
       <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 pt-4 pb-8 flex flex-col gap-2 text-center reveal">
         <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ 01 // PROPERTY SCENARIOS ]</span>
-        <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">
+        <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
           SITUATIONS WE RESOLVE
         </h1>
         <p class="text-base text-[#555964] max-w-lg mx-auto leading-relaxed">
@@ -92,7 +92,7 @@ export function renderSituationsPage() {
             <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 flex flex-col md:flex-row md:items-start justify-between gap-6 pb-8 border-b border-black/10">
               <div class="flex flex-col gap-2 max-w-2xl">
                 <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ ${s.badge} ]</span>
-                <h3 class="text-2xl sm:text-4xl font-black font-['Plus_Jakarta_Sans',sans-serif] text-[#111315]">${s.title}</h3>
+                <h3 class="text-2xl sm:text-4xl font-black font-['Playfair_Display',serif] text-[#111315]">${s.title}</h3>
                 <p class="text-base text-[#555964] leading-relaxed mt-1">${s.desc}</p>
               </div>
 
@@ -116,7 +116,7 @@ export function renderSituationsPage() {
       <!-- Direct Contact Prompt -->
       <div class="max-w-7xl mx-auto w-full px-4 sm:px-8 mt-16">
         <div class="text-center reveal p-8 sm:p-14 bg-[#111315] text-white flex flex-col items-center gap-4">
-          <h3 class="text-2xl sm:text-4xl font-black font-['Plus_Jakarta_Sans',sans-serif] text-white">Have a Unique or Complex Situation?</h3>
+          <h3 class="text-2xl sm:text-4xl font-black font-['Playfair_Display',serif] text-white">Have a Unique or Complex Situation?</h3>
           <p class="text-sm sm:text-base text-gray-300 max-w-md">
             Every Kentucky homeowner's circumstance is different. Speak confidentially with our acquisitions team today.
           </p>

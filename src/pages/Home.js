@@ -49,11 +49,11 @@ export function renderHomePage() {
           <!-- Giant Monumental Typography: "DREEM STUDIO" / "GN INVESTMENTS" (WHITE TYPOGRAPHY / ALIGNED TO THE LEFT) -->
           <div class="absolute top-2 sm:top-6 md:top-10 inset-x-0 z-10 max-w-7xl mx-auto w-full px-4 sm:px-10 flex flex-col items-start text-left">
             
-            <div class="animate-blur-in text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-none font-['Plus_Jakarta_Sans',sans-serif] filter drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+            <div class="animate-blur-in text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-none font-['Playfair_Display',serif] filter drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
               GN INVESTMENTS
             </div>
 
-            <h1 class="animate-blur-in-delay-1 text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight mt-1.5 sm:mt-2.5 font-['Plus_Jakarta_Sans',sans-serif] filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] text-left">
+            <h1 class="animate-blur-in-delay-1 text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight mt-1.5 sm:mt-2.5 font-['Playfair_Display',serif] filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] text-left">
               SELL DIRECT <span class="text-[#efbba5]">/</span> <span class="text-white font-black">100% AS-IS</span>
             </h1>
 
@@ -164,7 +164,7 @@ export function renderHomePage() {
             [ 02 // DIRECT BUYING ADVANTAGE ]
           </span>
 
-          <h2 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#111315] leading-[0.95] font-['Plus_Jakarta_Sans',sans-serif]">
+          <h2 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#111315] leading-[0.95] font-['Playfair_Display',serif]">
             BUILT WITH CAPITAL <span class="text-[#b88a76]">/</span><br/>
             DESIGNED FOR SPEED
           </h2>
@@ -176,15 +176,15 @@ export function renderHomePage() {
           <!-- Big Stat Grid -->
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-black/10">
             <div class="flex flex-col">
-              <span class="text-4xl sm:text-5xl font-black font-['Plus_Jakarta_Sans',sans-serif] text-[#111315] tracking-tight">$12M+</span>
+              <span class="text-4xl sm:text-5xl font-black font-['Playfair_Display',serif] text-[#111315] tracking-tight">$12M+</span>
               <span class="text-xs font-mono font-bold text-[#555964] uppercase tracking-wider mt-1">Direct Capital Deployed</span>
             </div>
             <div class="flex flex-col">
-              <span class="text-4xl sm:text-5xl font-black font-['Plus_Jakarta_Sans',sans-serif] text-[#b88a76] tracking-tight">7–14</span>
+              <span class="text-4xl sm:text-5xl font-black font-['Playfair_Display',serif] text-[#b88a76] tracking-tight">7–14</span>
               <span class="text-xs font-mono font-bold text-[#555964] uppercase tracking-wider mt-1">Days Average Close</span>
             </div>
             <div class="flex flex-col col-span-2 sm:col-span-1">
-              <span class="text-4xl sm:text-5xl font-black font-['Plus_Jakarta_Sans',sans-serif] text-[#111315] tracking-tight">0%</span>
+              <span class="text-4xl sm:text-5xl font-black font-['Playfair_Display',serif] text-[#111315] tracking-tight">0%</span>
               <span class="text-xs font-mono font-bold text-[#555964] uppercase tracking-wider mt-1">Realtor Fees ($0)</span>
             </div>
           </div>
@@ -226,7 +226,7 @@ export function renderHomePage() {
           <span class="text-xs font-mono uppercase tracking-widest text-[#b88a76] font-extrabold">
             [ 03 // VALUE COMPARISON ]
           </span>
-          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">
+          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
             DIRECT SALE <span class="text-[#b88a76]">VS.</span> MLS AGENT
           </h2>
           <p class="text-sm text-[#555964] max-w-md mt-1">
@@ -247,7 +247,7 @@ export function renderHomePage() {
           <span class="text-xs font-mono uppercase tracking-widest text-[#b88a76] font-extrabold">
             [ 04 // CLARITY &amp; QUESTIONS ]
           </span>
-          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">
+          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
             FREQUENTLY ASKED QUESTIONS
           </h2>
         </div>
@@ -268,7 +268,7 @@ export function renderHomePage() {
             </div>
             <div class="flex flex-col">
               <span class="text-[10px] font-mono uppercase tracking-widest text-[#efbba5] font-bold">Confidential Evaluation</span>
-              <h3 class="text-xl sm:text-2xl font-black font-['Plus_Jakarta_Sans',sans-serif] text-white">Ready for a Direct Cash Valuation?</h3>
+              <h3 class="text-xl sm:text-2xl font-black font-['Playfair_Display',serif] text-white">Ready for a Direct Cash Valuation?</h3>
               <p class="text-xs sm:text-sm text-gray-300">Receive your written As-Is offer with zero fees and no obligation.</p>
             </div>
           </div>

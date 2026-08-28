@@ -58,7 +58,7 @@ export function renderFooter() {
             <span class="status-dot"></span> NEXT STEPS // KENTUCKY REAL ESTATE
           </span>
 
-          <h2 id="footerHeading" class="text-4xl sm:text-6xl md:text-8xl font-black footer-text-glow tracking-tight mb-8 text-center font-['Plus_Jakarta_Sans',sans-serif]">
+          <h2 id="footerHeading" class="text-4xl sm:text-6xl md:text-8xl font-black footer-text-glow tracking-tight mb-8 text-center font-['Playfair_Display',serif]">
             Ready To Sell?
           </h2>
 

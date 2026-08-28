@@ -51,7 +51,7 @@ export function renderShowcaseCarousel() {
             <span class="w-2 h-2 rounded-full bg-[#b88a76] animate-ping"></span>
             [ RECENT CASE STUDIES // KENTUCKY ]
           </span>
-          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">
+          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
             ACQUISITIONS <span class="text-[#b88a76]">/</span> PORTFOLIO
           </h2>
         </div>
@@ -112,7 +112,7 @@ export function renderShowcaseCarousel() {
 
               <!-- Editorial Details Directly Underneath Image -->
               <div class="flex flex-col gap-2 pt-1 pl-4 sm:pl-6">
-                <h3 class="text-2xl font-black text-[#111315] font-['Plus_Jakarta_Sans',sans-serif] group-hover:text-[#b88a76] transition-colors">
+                <h3 class="text-2xl font-black text-[#111315] font-['Playfair_Display',serif] group-hover:text-[#b88a76] transition-colors">
                   ${c.title}
                 </h3>
                 

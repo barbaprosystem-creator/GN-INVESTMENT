@@ -46,9 +46,9 @@
   --warning: #F59E0B;
   --info: #3B82F6;
 
-  /* Typography */
-  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Typography (Luxury Editorial Serif) */
+  --font-heading: 'Playfair Display', 'Libre Caslon Text', 'Newsreader', Georgia, serif;
+  --font-body: 'Newsreader', 'Lora', Georgia, 'Times New Roman', serif;
 
   /* Shadows */
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);

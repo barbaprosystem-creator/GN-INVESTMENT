@@ -45,7 +45,7 @@ export function renderHowItWorksPage() {
       <!-- Header -->
       <div class="pt-4 pb-6 flex flex-col gap-2 text-center reveal">
         <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ 01 // 6-STEP PROCESS ]</span>
-        <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">
+        <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
           HOW SELLING TO US WORKS
         </h1>
         <p class="text-sm sm:text-base text-[#555964] max-w-md mx-auto leading-relaxed">
@@ -57,7 +57,7 @@ export function renderHowItWorksPage() {
       <div class="reveal mb-10">
         <div class="text-center mb-3">
           <span class="text-[11px] font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ LIVE EXPERIENCE PREVIEW ]</span>
-          <h2 class="text-xl sm:text-2xl font-bold text-[#111315] font-['Plus_Jakarta_Sans',sans-serif] mt-0.5">See A Typical Consultation</h2>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#111315] font-['Playfair_Display',serif] mt-0.5">See A Typical Consultation</h2>
         </div>
         ${renderLiveChatSimulator()}
       </div>
@@ -66,7 +66,7 @@ export function renderHowItWorksPage() {
       <div class="flex flex-col gap-4 mt-6">
         <div class="text-center mb-4 reveal">
           <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#b88a76]">[ DETAILED BREAKDOWN ]</span>
-          <h2 class="text-xl sm:text-3xl font-bold text-[#111315] font-['Plus_Jakarta_Sans',sans-serif] mt-0.5">The 6 Acquisition Steps</h2>
+          <h2 class="text-xl sm:text-3xl font-bold text-[#111315] font-['Playfair_Display',serif] mt-0.5">The 6 Acquisition Steps</h2>
         </div>
 
         ${steps.map((s, idx) => `
@@ -75,7 +75,7 @@ export function renderHowItWorksPage() {
               ${s.num}
             </div>
             <div class="flex flex-col gap-1 flex-1">
-              <h3 class="font-bold text-base text-[#111315] font-['Plus_Jakarta_Sans',sans-serif]">${s.title}</h3>
+              <h3 class="font-bold text-base text-[#111315] font-['Playfair_Display',serif]">${s.title}</h3>
               <p class="text-xs sm:text-sm text-[#555964] leading-relaxed">${s.desc}</p>
             </div>
             <span class="material-symbols-outlined text-[#b88a76] text-[22px] hidden sm:block shrink-0">${s.icon}</span>

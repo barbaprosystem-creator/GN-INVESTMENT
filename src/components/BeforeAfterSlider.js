@@ -6,7 +6,7 @@ export function renderBeforeAfterSlider() {
         <span class="text-xs font-mono font-extrabold uppercase tracking-widest text-[#b88a76]">
           [ 03 // THE AS-IS REALITY ]
         </span>
-        <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Plus_Jakarta_Sans',sans-serif] mt-2">
+        <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif] mt-2">
           YOU SELL AS-IS <span class="text-[#b88a76]">/</span> WE HANDLE THE REST
         </h2>
         <p class="text-sm text-[#555964] max-w-md mx-auto mt-1 leading-relaxed">
