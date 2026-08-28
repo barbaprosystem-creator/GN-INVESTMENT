@@ -49,12 +49,12 @@ export function renderHomePage() {
           <!-- Giant Monumental Typography: "DREEM STUDIO" / "GN INVESTMENTS" (WHITE TYPOGRAPHY / ALIGNED TO THE LEFT) -->
           <div class="absolute top-2 sm:top-6 md:top-10 inset-x-0 z-10 max-w-7xl mx-auto w-full px-4 sm:px-10 flex flex-col items-start text-left">
             
-            <div class="animate-blur-in text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white/95 leading-none font-['Plus_Jakarta_Sans',sans-serif] filter drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
-              DREEM STUDIO
+            <div class="animate-blur-in text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-none font-['Plus_Jakarta_Sans',sans-serif] filter drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+              GN INVESTMENTS
             </div>
 
             <h1 class="animate-blur-in-delay-1 text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight mt-1.5 sm:mt-2.5 font-['Plus_Jakarta_Sans',sans-serif] filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] text-left">
-              SELL DIRECT <span class="text-[#efbba5]">/</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">100% AS-IS</span>
+              SELL DIRECT <span class="text-[#efbba5]">/</span> <span class="text-white font-black">100% AS-IS</span>
             </h1>
 
             <p 
