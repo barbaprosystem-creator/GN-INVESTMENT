@@ -110,22 +110,29 @@
   transform: translateX(3px);
 }
 
-/* Hero Wall Card & CTA Direct Interactivity */
+/* Hero Wall Card & Both Action Buttons Interactivity */
 #portalWallLayer {
-  pointer-events: none;
+  z-index: 60 !important;
 }
-#portalWallLayer.is-interactive,
-#portalWallLayer.is-interactive #portalWallCard,
-#portalWallLayer.is-interactive #wallActions,
-#portalWallLayer.is-interactive #portalCtaBtn {
+#portalWallCard {
   pointer-events: auto !important;
+  position: relative;
+  z-index: 65 !important;
 }
-#portalCtaBtn {
+#wallActions {
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 70 !important;
+}
+#portalCtaBtn,
+#portalPhoneBtn {
   pointer-events: auto !important;
   cursor: pointer !important;
   position: relative;
-  z-index: 50;
+  z-index: 80 !important;
   touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* Modal System */

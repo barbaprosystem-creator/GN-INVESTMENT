@@ -90,28 +90,27 @@ export function renderPortalHero() {
              ============================================================ -->
         <style>
           #portalWallCard {
-            transform: perspective(850px) rotateY(26deg) rotateX(-3.5deg) skewY(-13.5deg) scale(0.95);
-            -webkit-transform: perspective(850px) rotateY(26deg) rotateX(-3.5deg) skewY(-13.5deg) scale(0.95);
+            transform: skewY(-13.5deg) scale(0.95);
+            -webkit-transform: skewY(-13.5deg) scale(0.95);
             transform-origin: left center;
             -webkit-transform-origin: left center;
-            transform-style: preserve-3d;
           }
           @media (min-width: 768px) {
             #portalWallCard {
-              transform: perspective(1000px) rotateY(18deg) rotateX(-3deg) skewY(-9.8deg) scale(1.15);
-              -webkit-transform: perspective(1000px) rotateY(18deg) rotateX(-3deg) skewY(-9.8deg) scale(1.15);
+              transform: skewY(-9.8deg) scale(1.12);
+              -webkit-transform: skewY(-9.8deg) scale(1.12);
             }
           }
         </style>
 
         <div 
           id="portalWallLayer" 
-          class="absolute inset-x-0 bottom-0 top-[66.5%] sm:top-[62%] md:top-[53.5%] z-20 pointer-events-none flex items-start justify-start pl-[16vw] pr-4 sm:pl-[16vw] md:pl-[9.4vw] md:pr-6"
-          style="perspective: 1000px; -webkit-perspective: 1000px; perspective-origin: 30% 85%; -webkit-perspective-origin: 30% 85%; transform-style: preserve-3d; opacity: 0;"
+          class="absolute inset-x-0 bottom-0 top-[66.5%] sm:top-[62%] md:top-[53.5%] z-50 flex items-start justify-start pl-[16vw] pr-4 sm:pl-[16vw] md:pl-[9.4vw] md:pr-6 pointer-events-auto"
+          style="opacity: 0; visibility: hidden;"
         >
           <div 
             id="portalWallCard" 
-            class="max-w-md sm:max-w-lg md:max-w-2xl text-left pointer-events-auto"
+            class="max-w-md sm:max-w-lg md:max-w-2xl text-left pointer-events-auto relative z-50"
           >
             
             <!-- Architectural Metadata Badge -->
@@ -137,7 +136,7 @@ export function renderPortalHero() {
             <!-- Actions -->
             <div 
               id="wallActions" 
-              class="flex flex-row items-center gap-2 sm:gap-4 mt-3 sm:mt-6"
+              class="flex flex-row items-center gap-2 sm:gap-4 mt-3 sm:mt-6 relative z-50 pointer-events-auto"
             >
               <a 
                 href="#homeOfferSection" 
@@ -145,7 +144,7 @@ export function renderPortalHero() {
                 data-nav="#homeOfferSection"
                 data-analytics-cta="get-my-offer" 
                 data-location="portal_hero_wall" 
-                class="btn-copper py-2.5 sm:py-3.5 px-4 sm:px-8 text-xs sm:text-base font-bold shadow-lifted inline-flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer whitespace-nowrap"
+                class="btn-copper py-2.5 sm:py-3.5 px-4 sm:px-8 text-xs sm:text-base font-bold shadow-lifted inline-flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer whitespace-nowrap pointer-events-auto relative z-50"
               >
                 <span>Get My Offer</span>
                 <span class="material-symbols-outlined text-[15px] sm:text-[18px]">arrow_forward</span>
@@ -153,8 +152,9 @@ export function renderPortalHero() {
 
               <a 
                 href="tel:5024903131" 
+                id="portalPhoneBtn"
                 data-location="portal_hero_wall" 
-                class="btn-secondary bg-white/20 hover:bg-white/35 text-white border-white/40 py-2.5 sm:py-3.5 px-3.5 sm:px-6 text-xs sm:text-sm font-semibold inline-flex items-center justify-center gap-1.5 sm:gap-2 backdrop-blur-md cursor-pointer whitespace-nowrap"
+                class="btn-secondary bg-white/20 hover:bg-white/35 text-white border-white/40 py-2.5 sm:py-3.5 px-3.5 sm:px-6 text-xs sm:text-sm font-semibold inline-flex items-center justify-center gap-1.5 sm:gap-2 backdrop-blur-md cursor-pointer whitespace-nowrap pointer-events-auto relative z-50"
               >
                 <span class="material-symbols-outlined text-[15px] sm:text-[18px] text-soft-copper">call</span>
                 <span>Call (502) 490-3131</span>
@@ -232,7 +232,11 @@ export function initPortalHero() {
   if (!section || !pinContainer || !canvas) return;
 
   // Initialize Initial Visual States
-  if (wallLayer) wallLayer.style.opacity = '0';
+  if (wallLayer) {
+    wallLayer.style.opacity = '0';
+    wallLayer.style.visibility = 'hidden';
+    wallLayer.style.pointerEvents = 'none';
+  }
   if (scrollPrompt) scrollPrompt.style.opacity = '1';
   if (secondScrollPrompt) secondScrollPrompt.style.opacity = '0';
   if (processPrompt) processPrompt.style.opacity = '0';
@@ -570,18 +574,13 @@ export function initPortalHero() {
 
   // Wall interactivity helper: ensures pointer-events are enabled whenever the card is visible
   function updateWallInteractivity(progress) {
+    if (!wallLayer) return;
     if (progress >= 0.24 && progress <= 0.42) {
-      if (wallLayer) {
-        wallLayer.classList.add('is-interactive');
-        wallLayer.style.pointerEvents = 'auto';
-      }
-    } else {
-      if (wallLayer) {
-        wallLayer.classList.remove('is-interactive');
-        if (progress < 0.22 || progress > 0.44) {
-          wallLayer.style.pointerEvents = 'none';
-        }
-      }
+      wallLayer.style.visibility = 'visible';
+      wallLayer.style.pointerEvents = 'auto';
+    } else if (progress < 0.22 || progress > 0.44) {
+      wallLayer.style.visibility = 'hidden';
+      wallLayer.style.pointerEvents = 'none';
     }
   }
 
@@ -603,10 +602,10 @@ export function initPortalHero() {
   window.addEventListener('scroll', updateScrollProgressDirectly, { passive: true });
   window.addEventListener('resize', () => { needsRedraw = true; }, { passive: true });
 
-  // Direct click handler on Hero Wall CTA button for foolproof responsiveness
+  // Direct click and touch handlers on Hero Wall action buttons for foolproof responsiveness
   const portalCtaBtn = document.getElementById('portalCtaBtn');
   if (portalCtaBtn) {
-    portalCtaBtn.addEventListener('click', (e) => {
+    const handleCta = (e) => {
       e.preventDefault();
       e.stopPropagation();
       const target = document.getElementById('homeOfferSection');
@@ -619,7 +618,21 @@ export function initPortalHero() {
       } else {
         window.location.href = '/get-my-offer';
       }
-    });
+    };
+    portalCtaBtn.onclick = handleCta;
+    portalCtaBtn.addEventListener('click', handleCta);
+    portalCtaBtn.addEventListener('touchend', handleCta);
+  }
+
+  const portalPhoneBtn = document.getElementById('portalPhoneBtn');
+  if (portalPhoneBtn) {
+    const handlePhone = (e) => {
+      e.stopPropagation();
+      window.location.href = 'tel:5024903131';
+    };
+    portalPhoneBtn.onclick = handlePhone;
+    portalPhoneBtn.addEventListener('click', handlePhone);
+    portalPhoneBtn.addEventListener('touchend', handlePhone);
   }
 
   startRenderLoop();
@@ -683,9 +696,9 @@ export function initPortalHero() {
   // 2. Milestone 1: Wall interactive card fades in as walkthrough reaches the living room wall (0.27 to 0.29)
   masterTimeline.fromTo(
     wallLayer,
-    { opacity: 0, pointerEvents: 'none' },
-    { opacity: 1, pointerEvents: 'auto', ease: 'power2.out', duration: 0.03 },
-    0.28
+    { opacity: 0, autoAlpha: 0 },
+    { opacity: 1, autoAlpha: 1, ease: 'power2.out', duration: 0.03 },
+    0.27
   );
 
   // Second scroll prompt hints user to continue scrolling
@@ -702,8 +715,8 @@ export function initPortalHero() {
   // Wall Layer and Second Scroll Prompt fade out (0.35 to 0.37)
   masterTimeline.to(
     wallLayer,
-    { opacity: 0, pointerEvents: 'none', ease: 'power2.in', duration: 0.02 },
-    0.35
+    { opacity: 0, autoAlpha: 0, ease: 'power2.in', duration: 0.03 },
+    0.36
   );
   if (secondScrollPrompt) {
     masterTimeline.to(
