@@ -42,9 +42,9 @@ export function renderFloatingDock() {
     },
     {
       id: "call",
-      label: "(502) 800-SELL",
+      label: "(502) 490-3131",
       icon: "call",
-      href: "tel:5028007355",
+      href: "tel:5024903131",
       nav: null,
       isPrimary: false,
       isPhone: true

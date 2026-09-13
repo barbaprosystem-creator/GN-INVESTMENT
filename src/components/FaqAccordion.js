@@ -1,56 +1,85 @@
 export function renderFaqAccordion() {
   const faqs = [
     {
-      q: "What does selling 'AS-IS' mean with G&N Investment?",
-      a: "Selling 'AS-IS' means you do not have to spend a single dollar on repairs, painting, roof replacements, plumbing, deep cleaning, or yard maintenance. You don't even have to clean out old furniture or unwanted belongings. We evaluate and purchase the property in its exact current condition."
+      q: "What does selling 'As-Is' actually mean? Do I need to clean or fix anything?",
+      a: "Selling 'As-Is' means you do not have to spend a single dollar or minute on repairs, painting, roof fixes, cleaning, or yard maintenance. You don't even have to remove old furniture, appliances, or unwanted items. Take what you want to keep and leave the rest behind."
     },
     {
-      q: "Are there any fees, commissions, or hidden costs when working with you?",
-      a: "No. Unlike traditional real estate agents who charge 5% to 6% in commissions plus seller closing costs, G&N Investment is a direct buyer. We do not charge fees, there are zero commissions, and we cover all standard closing costs handled by the title company."
+      q: "Are there any commissions, appraisal fees, or hidden closing costs?",
+      a: "No. We are direct property buyers, not agents representing you for a commission. There are 0% agent fees, zero appraisal demands, and G&N Investment covers standard title and escrow closing fees."
     },
     {
-      q: "How are you different from a licensed real estate agent?",
-      a: "A real estate agent lists your house on the MLS, conducts open houses, and looks for a third-party retail buyer (taking a 6% commission in the process). G&N Investment is the actual buyer. We purchase your property directly for investment purposes with our own capital, eliminating middlemen, loan approvals, and long wait times."
+      q: "Am I obligated to accept your offer after submitting my property details?",
+      a: "There is never any obligation. Our property reviews and written offers are 100% free. You can review our offer, consult your family, compare your options, and decide what is best for you."
     },
     {
-      q: "Am I obligated to accept your offer once you evaluate my property?",
-      a: "Absolutely not. Our property evaluations and direct offers are 100% free and come with zero obligation. You are in complete control to decide whether the offer works for your timeline and personal goals."
+      q: "How fast can we close? Can I choose my own date if I need more time?",
+      a: "Yes. Because we do not rely on traditional bank mortgage underwriting, we can close in as few as 7 to 14 days once clear title is verified. If you need 30, 60, or 90 days to arrange your next move, you set the closing date."
     },
     {
-      q: "How fast can G&N Investment close on my house?",
-      a: "Because we purchase directly without relying on traditional mortgage underwriting or bank appraisals, we can close in as little as 7 to 14 days once clear title is confirmed. If you need more time to pack or find your next home, we can schedule the closing date whenever you are ready."
+      q: "What if there are tenants living in the home or problem leases?",
+      a: "We frequently purchase properties with active tenants, lease violations, or behind-on-rent situations. We handle tenant transitions respectfully and professionally after closing so you do not have to navigate evictions or disputes."
     },
     {
-      q: "What if the house has severe damage (fire, water, mold, foundation)?",
-      a: "We regularly purchase homes that have suffered roof leaks, burst pipes, fire or smoke damage, foundation issues, or deferred maintenance. You do not need to fix anything before contacting us."
-    },
-    {
-      q: "What if there are tenants living in the home or unwanted items left inside?",
-      a: "That is completely fine! We purchase occupied rentals with active leases, problem tenants, or vacant properties. You take what you want and leave behind any trash, old furniture, or items you don't wish to move."
-    },
-    {
-      q: "How do you calculate your direct offer price?",
-      a: "Our evaluation is based on the location of your property, current market values of renovated comparable homes in your Louisville/Kentucky neighborhood, and the estimated cost of repairs needed. We aim to present a fair, transparent offer that provides a smooth and hassle-free solution."
+      q: "How do you determine the offer price for my property?",
+      a: "We look at recent sales of comparable properties in your immediate Louisville or Kentucky neighborhood, factor in the cost of needed repairs, and present a fair, transparent number that makes sense for both sides."
     }
   ];
 
   return `
-    <div class="faq-list" id="faqAccordion">
-      ${faqs.map((item, index) => `
-        <div class="faq-item ${index === 0 ? 'open' : ''}" data-faq-index="${index}">
-          <button class="faq-question" type="button" aria-expanded="${index === 0 ? 'true' : 'false'}">
-            <span>${item.q}</span>
-            <div class="faq-toggle-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+    <div class="w-full flex flex-col gap-8">
+      
+      <!-- Accordion List -->
+      <div class="faq-list rounded-2xl bg-white border border-border-warm shadow-subtle p-2 sm:p-4" id="faqAccordion">
+        ${faqs.map((item, index) => `
+          <div class="faq-item ${index === 0 ? 'open' : ''}" data-faq-index="${index}">
+            <button 
+              class="faq-question" 
+              type="button" 
+              aria-expanded="${index === 0 ? 'true' : 'false'}"
+            >
+              <span class="text-left font-bold text-ink text-sm sm:text-base">${item.q}</span>
+              <div class="faq-toggle-icon">
+                <span class="material-symbols-outlined text-[20px]">expand_more</span>
+              </div>
+            </button>
+            <div class="faq-answer">
+              <p class="text-xs sm:text-sm leading-relaxed">${item.a}</p>
             </div>
-          </button>
-          <div class="faq-answer">
-            <p>${item.a}</p>
           </div>
+        `).join('')}
+      </div>
+
+      <!-- Unified Action Prompt after FAQ -->
+      <div class="bg-warm-white rounded-2xl p-6 sm:p-8 border border-border-warm text-center flex flex-col items-center gap-3">
+        <h3 class="text-lg sm:text-xl font-serif font-bold text-ink">
+          Have a specific question about your property?
+        </h3>
+        <p class="text-xs sm:text-sm text-warm-gray max-w-md">
+          Our local Louisville team is here to answer your questions with zero sales pressure.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center gap-3 mt-2 w-full sm:w-auto">
+          <a 
+            href="/get-my-offer" 
+            data-nav="get-my-offer"
+            data-analytics-cta="get-my-offer"
+            data-location="faq_accordion"
+            class="btn-primary w-full sm:w-auto px-7 py-3"
+          >
+            <span>Get My Offer</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+          <a 
+            href="tel:5024903131" 
+            data-location="faq_accordion"
+            class="btn-secondary w-full sm:w-auto px-6 py-3"
+          >
+            <span class="material-symbols-outlined text-[18px] text-copper">call</span>
+            <span>Call (502) 490-3131</span>
+          </a>
         </div>
-      `).join('')}
+      </div>
+
     </div>
   `;
 }

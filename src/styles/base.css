@@ -4,11 +4,9 @@
   html {
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: #f7f6f2;
-    color: #111315;
+    overflow-x: clip;
+    background-color: var(--bg-primary, #F7F5F1);
+    color: var(--color-ink, #171717);
   }
 
   body {
@@ -16,26 +14,32 @@
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background: #f7f6f2;
-    font-family: 'Newsreader', 'Lora', Georgia, 'Times New Roman', serif;
-    color: #111315;
+    overflow-x: clip;
+    background: var(--bg-primary, #F7F5F1);
+    font-family: var(--font-sans, 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif);
+    color: var(--color-ink, #171717);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-overflow-scrolling: touch;
+    line-height: 1.6;
   }
 
-  p, li, input, textarea, button, select {
-    font-family: 'Newsreader', 'Lora', Georgia, 'Times New Roman', serif;
+  p, li, input, textarea, button, select, span, label {
+    font-family: var(--font-sans, 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', 'Newsreader', 'Libre Caslon Text', Georgia, serif;
+  p, li {
+    text-wrap: pretty;
   }
 
-  .font-mono {
-    font-family: 'Space Grotesk', monospace !important;
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-serif, 'DM Serif Display', Georgia, serif);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  table, .font-mono, .tabular-nums, [data-numeric] {
+    font-variant-numeric: tabular-nums;
   }
 
   .pb-safe {
@@ -63,29 +67,31 @@ main > :first-child {
   scrollbar-width: none;
 }
 
-/* Glassmorphism helpers for Architectural Light Theme */
-.bg-glass-card {
-  background: rgba(255, 255, 255, 0.85);
+/* Form input base styling */
+input, select, textarea {
+  min-height: 48px;
+  font-size: 16px; /* Prevents auto-zoom on iOS Safari */
 }
 
-.border-glass-stroke {
-  border-color: rgba(0, 0, 0, 0.08);
+/* Touch targets */
+button, a.btn {
+  min-height: 44px;
 }
 
-/* Animations and reveals */
+/* Subtle reveal on scroll */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(16px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.active {
     opacity: 1;
     transform: translateY(0);
   }
-  .delay-100 { transition-delay: 100ms; }
-  .delay-200 { transition-delay: 200ms; }
-  .delay-300 { transition-delay: 300ms; }
+  .delay-100 { transition-delay: 80ms; }
+  .delay-200 { transition-delay: 160ms; }
+  .delay-300 { transition-delay: 240ms; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -94,26 +100,6 @@ main > :first-child {
     transform: none;
     transition: none;
   }
-}
-
-@keyframes softPulse {
-  0% { box-shadow: 0 0 0 0 rgba(197, 131, 43, 0.4); }
-  70% { box-shadow: 0 0 0 15px rgba(197, 131, 43, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(197, 131, 43, 0); }
-}
-
-.btn-pulse {
-  animation: softPulse 2s infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn-pulse { animation: none; }
-  .animate-pulse { animation: none !important; }
-}
-
-/* Tactile press micro-interactions */
-button:active, a:active {
-  transform: scale(0.97);
 }
 
 .material-symbols-outlined {

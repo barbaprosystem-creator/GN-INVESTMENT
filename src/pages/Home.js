@@ -1,286 +1,374 @@
+import { renderPortalHero, initPortalHero } from '../components/PortalHero.js';
+import { renderOfferForm, initOfferForm } from '../components/OfferForm.js';
 import { renderComparisonTable } from '../components/ComparisonTable.js';
-import { renderFaqAccordion } from '../components/FaqAccordion.js';
-import { renderBeforeAfterSlider } from '../components/BeforeAfterSlider.js';
-import { renderShowcaseCarousel } from '../components/ShowcaseCarousel.js';
+import { renderFaqAccordion, initFaqAccordion } from '../components/FaqAccordion.js';
 
 export function renderHomePage() {
   return `
-    <div class="flex flex-col w-full relative min-h-screen pb-24 md:pb-16 overflow-hidden bg-[#f7f6f2] text-[#111315]">
-      <!-- Ambient Architectural Scrim Glow -->
-      <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-        <div class="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[#b88a76]/5 blur-[120px]"></div>
-        <div class="absolute top-[35%] -right-[20%] w-[70vw] h-[70vw] rounded-full bg-[#e8e4d8]/40 blur-[140px]"></div>
-      </div>
+    <div class="flex flex-col w-full text-ink">
+      
+      <!-- =========================================================================
+           1. HERO SECTION: Pinned 300vh Scroll-Controlled G&N Portal Experience
+           ========================================================================= -->
+      ${renderPortalHero()}
+
 
       <!-- =========================================================================
-           1. HERO SECTION: Full Panoramic Architectural Backdrop (Architectural White Theme)
+           2. TRUST STRIP: Quiet Editorial Rule Strip (No chunky badge boxes)
            ========================================================================= -->
-      <section class="relative w-full flex flex-col justify-between overflow-hidden bg-[#f7f6f2] text-[#111315]">
-        
-        <!-- Top Editorial Meta Bar (Inside Hero) -->
-        <div class="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-8 pt-4 sm:pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-black/8 pb-4">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-[#111315]"></span>
-            <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#111315]">
-              [ 01 // DIRECT REAL ESTATE CAPITAL • KENTUCKY ]
-            </span>
-          </div>
-          <div class="flex items-center gap-4 text-xs font-mono text-[#555964]">
-            <span>LOUISVILLE • LEXINGTON • JEFFERSON CO.</span>
-            <span class="text-black/20">•</span>
-            <span class="font-bold text-[#111315]">EST. 2026</span>
-          </div>
-        </div>
-
-        <!-- Hero Visual: Full Image Complete in the Background with Floating Layered Elements -->
-        <div class="relative w-full overflow-hidden flex flex-col items-center">
-          
-          <!-- Full-Bleed High-Res Image in Background -->
-          <img 
-            src="/images/hero-clean-house.jpg" 
-            alt="Modern Residence - GN Investments" 
-            class="w-full h-auto object-cover sm:object-contain select-none" 
-          />
-
-          <!-- Superimposed Ambient Scrim for Crisp White Typography Readability -->
-          <div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent pointer-events-none"></div>
-          <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent pointer-events-none"></div>
-
-          <!-- Giant Monumental Typography: "GN INVESTMENTS" (WHITE TYPOGRAPHY / ALIGNED TO THE LEFT) -->
-          <div class="absolute top-2 sm:top-6 md:top-10 inset-x-0 z-10 max-w-7xl mx-auto w-full px-4 sm:px-10 flex flex-col items-start text-left">
+      <section class="w-full bg-[#F7F5F1] py-4 sm:py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-medium text-ink">
             
-            <div class="animate-blur-in text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-white leading-none font-['Playfair_Display',serif] filter drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
-              GN INVESTMENTS
+            <div class="reveal-text delay-75 trust-item flex items-center gap-2.5 sm:justify-start">
+              <span class="beacon-dot"></span>
+              <span><strong>Local Kentucky Buyer</strong></span>
             </div>
 
-            <h1 class="animate-blur-in-delay-1 text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight mt-1.5 sm:mt-2.5 font-['Playfair_Display',serif] filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] text-left">
-              SELL DIRECT <span class="text-[#efbba5]">/</span> <span class="text-white font-black">100% AS-IS</span>
-            </h1>
+            <div class="reveal-text delay-150 trust-item flex items-center gap-2.5 sm:justify-center border-l-0 sm:border-l border-border-warm sm:pl-4">
+              <span class="beacon-dot"></span>
+              <span><strong>Sell In Current Condition</strong></span>
+            </div>
 
-            <p 
-              id="heroEncryptedText" 
-              data-encrypted-text="No 6% agent commissions. No mandatory repair lists. We buy your Kentucky property directly with private cash capital."
-              class="text-[11px] sm:text-sm md:text-base text-gray-200 max-w-md lg:max-w-lg leading-relaxed mt-1 sm:mt-1.5 font-normal filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] cursor-pointer transition-all hover:text-white text-left"
-              title="Click or hover to decrypt"
-            >
-              No 6% agent commissions. No mandatory repair lists. We buy your Kentucky property directly with private cash capital.
+            <div class="reveal-text delay-225 trust-item flex items-center gap-2.5 sm:justify-center border-l-0 sm:border-l border-border-warm sm:pl-4">
+              <span class="beacon-dot"></span>
+              <span><strong>0% Real Estate Commissions</strong></span>
+            </div>
+
+            <div class="reveal-text delay-300 trust-item flex items-center gap-2.5 sm:justify-end border-l-0 sm:border-l border-border-warm sm:pl-4">
+              <span class="beacon-dot"></span>
+              <span><strong>Choose Your Closing Date</strong></span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================================
+           3. INLINE 2-STEP "GET MY OFFER" LEAD CAPTURE
+           Placed directly after the Trust Strip for immediate valuation access
+           ========================================================================= -->
+      <section class="py-12 sm:py-16 w-full" id="homeOfferSection">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-left mb-6 sm:mb-8 max-w-xl">
+            <div class="reveal-text badge-copper mb-1">
+              <span class="beacon-dot"></span>
+              <span>Start Your Valuation</span>
+            </div>
+            <h2 class="reveal-text delay-75 text-3xl sm:text-4xl font-serif font-bold text-ink">
+              Request Your Direct As-Is Offer
+            </h2>
+            <p class="reveal-text delay-150 text-xs sm:text-sm text-warm-gray mt-1 leading-relaxed">
+              Complete the two brief steps below. There are zero fees, zero sales obligation, and your privacy is strictly protected.
             </p>
           </div>
 
-          <!-- UNIFIED HORIZONTAL MULTI-FIELD PILL FORM (Floating over the lawn in Architectural White) -->
-          <div class="w-full max-w-4xl mx-auto z-20 -mt-6 sm:-mt-12 md:-mt-16 px-2 sm:px-4">
-            <form id="heroMultiPillForm" class="w-full bg-white/95 backdrop-blur-2xl p-1.5 sm:p-2 rounded-full border border-black/10 shadow-[0_15px_45px_rgba(0,0,0,0.12)] flex flex-row items-center divide-x divide-black/8" novalidate>
-              
-              <!-- Field 1: Name -->
-              <div class="flex flex-col justify-center px-2 sm:px-4 py-1 sm:py-2 flex-1 min-w-0">
-                <label for="pillName" class="text-[7.5px] sm:text-[10px] font-mono font-bold uppercase tracking-tighter sm:tracking-widest text-[#b88a76] truncate">Name</label>
-                <input 
-                  type="text" 
-                  id="pillName" 
-                  placeholder="Name" 
-                  class="bg-transparent text-[#111315] placeholder:text-[#8a8e99] text-[10px] sm:text-sm focus:outline-none w-full truncate leading-tight mt-0.5" 
-                  required 
-                />
-              </div>
-
-              <!-- Field 2: Address -->
-              <div class="flex flex-col justify-center px-2 sm:px-4 py-1 sm:py-2 flex-[1.4] sm:flex-[1.6] min-w-0">
-                <label for="pillAddress" class="text-[7.5px] sm:text-[10px] font-mono font-bold uppercase tracking-tighter sm:tracking-widest text-[#b88a76] truncate">Address</label>
-                <input 
-                  type="text" 
-                  id="pillAddress" 
-                  placeholder="KY Address" 
-                  class="bg-transparent text-[#111315] placeholder:text-[#8a8e99] text-[10px] sm:text-sm focus:outline-none w-full truncate leading-tight mt-0.5" 
-                  required 
-                />
-              </div>
-
-              <!-- Field 3: Phone -->
-              <div class="flex flex-col justify-center px-2 sm:px-4 py-1 sm:py-2 flex-1 min-w-0">
-                <label for="pillPhone" class="text-[7.5px] sm:text-[10px] font-mono font-bold uppercase tracking-tighter sm:tracking-widest text-[#b88a76] truncate">Phone</label>
-                <input 
-                  type="tel" 
-                  id="pillPhone" 
-                  placeholder="Phone" 
-                  class="bg-transparent text-[#111315] placeholder:text-[#8a8e99] text-[10px] sm:text-sm focus:outline-none w-full truncate leading-tight mt-0.5" 
-                  required 
-                />
-              </div>
-
-              <!-- Field 4: Email -->
-              <div class="flex flex-col justify-center px-2 sm:px-4 py-1 sm:py-2 flex-1 min-w-0">
-                <label for="pillEmail" class="text-[7.5px] sm:text-[10px] font-mono font-bold uppercase tracking-tighter sm:tracking-widest text-[#b88a76] truncate">Email</label>
-                <input 
-                  type="email" 
-                  id="pillEmail" 
-                  placeholder="Email" 
-                  class="bg-transparent text-[#111315] placeholder:text-[#8a8e99] text-[10px] sm:text-sm focus:outline-none w-full truncate leading-tight mt-0.5" 
-                />
-              </div>
-
-              <!-- Submit Button Pill -->
-              <div class="p-0.5 sm:p-1.5 shrink-0 flex items-center">
-                <button 
-                  type="submit" 
-                  class="shimmer-btn bg-[#111315] hover:bg-[#232730] text-white font-extrabold text-[9px] sm:text-xs uppercase tracking-tight sm:tracking-widest px-3 sm:px-8 py-2.5 sm:py-4 rounded-full flex items-center justify-center gap-1 sm:gap-2 shadow-md shadow-black/20 cursor-pointer whitespace-nowrap active:scale-95 transition-all"
-                  title="Get Cash Offer"
-                >
-                  <span class="hidden sm:inline">GET CASH OFFER</span>
-                  <span class="sm:hidden text-[9px] font-bold">OFFER</span>
-                  <span class="material-symbols-outlined text-[13px] sm:text-[16px]">arrow_forward</span>
-                </button>
-              </div>
-
-            </form>
+          <div class="reveal-text delay-150">
+            ${renderOfferForm({ formId: 'homeOfferForm' })}
           </div>
-        </div>
 
-        <!-- HERO BOTTOM FOOTER CONTRAST STRIP (Warm Bone / Sand Light Strip) -->
-        <div class="relative z-30 w-full bg-[#eae6dc] text-[#111315] border-y border-black/8 px-4 sm:px-8 py-3.5 sm:py-4 mt-6">
-          <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 overflow-x-auto hide-scrollbar text-xs font-mono tracking-widest uppercase">
-            <div class="flex items-center gap-2.5 text-[#111315] font-bold shrink-0">
-              <span class="w-2 h-2 rounded-full bg-[#b88a76]"></span>
-              <span>WHERE ARCHITECTURE MEETS DIRECT CAPITAL</span>
-            </div>
-            <div class="flex items-center gap-4 shrink-0 text-[#555964]">
-              <span>LOUISVILLE & STATEWIDE</span>
-              <span class="text-black/20">•</span>
-              <span>0% AGENT COMMISSIONS</span>
-              <span class="text-black/20">•</span>
-              <span class="text-[#b88a76] font-bold">CERTIFIED ESCROW CLOSING</span>
-            </div>
-          </div>
         </div>
-
       </section>
 
+
+
       <!-- =========================================================================
-           2. ASYMMETRIC EDITORIAL: Built on Direct Capital (Architectural Layout)
+           4. COMMON SITUATIONS: 3 Featured Stories + Quiet Editorial Index
+           (Replaces repetitive 6-card grid with authentic storytelling)
            ========================================================================= -->
       <section class="py-12 sm:py-20 w-full">
-        <!-- Content Constrained to max-w-7xl -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 mb-10 flex flex-col gap-6">
-          <span class="text-xs font-mono uppercase tracking-widest text-[#b88a76] font-extrabold">
-            [ 02 // DIRECT BUYING ADVANTAGE ]
-          </span>
-
-          <h2 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#111315] leading-[0.95] font-['Playfair_Display',serif]">
-            BUILT WITH CAPITAL <span class="text-[#b88a76]">/</span><br/>
-            DESIGNED FOR SPEED
-          </h2>
-
-          <p class="text-base sm:text-lg text-[#3d414a] leading-relaxed max-w-2xl font-normal">
-            Traditional real estate is bogged down by mortgage contingencies, appraisal demands, and open-house disruptions. G&amp;N operates as a direct private investment principal — eliminating middleman commissions and closing on your terms.
-          </p>
-
-          <!-- Big Stat Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-black/10">
-            <div class="flex flex-col">
-              <span class="text-4xl sm:text-5xl font-black font-['Playfair_Display',serif] text-[#111315] tracking-tight">$12M+</span>
-              <span class="text-xs font-mono font-bold text-[#555964] uppercase tracking-wider mt-1">Direct Capital Deployed</span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+          
+          <div class="max-w-2xl text-left mb-12 sm:mb-16">
+            <div class="reveal-text badge-copper mb-2">
+              <span class="beacon-dot"></span>
+              <span>Common Situations</span>
             </div>
-            <div class="flex flex-col">
-              <span class="text-4xl sm:text-5xl font-black font-['Playfair_Display',serif] text-[#b88a76] tracking-tight">7–14</span>
-              <span class="text-xs font-mono font-bold text-[#555964] uppercase tracking-wider mt-1">Days Average Close</span>
+            <h2 class="reveal-text delay-75 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink leading-tight">
+              Properties We Buy Across Kentucky
+            </h2>
+            <p class="reveal-text delay-150 text-sm sm:text-base text-warm-gray mt-3 leading-relaxed">
+              We focus on situations where listing on the retail market causes unnecessary delay, expense, or anxiety. Here are three of the most frequent circumstances we resolve.
+            </p>
+          </div>
+
+          <!-- 3 Featured Situations (With Honest Photography & Micro-Motion) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Story 1: Repairs Needed -->
+            <div class="reveal-text delay-75 group flex flex-col text-left">
+              <div class="rounded-xl overflow-hidden border border-border-warm double-bezel-subtle mb-4 card-zoom-wrapper">
+                <img 
+                  src="/images/as-is-house.jpg" 
+                  alt="Property needing updates purchased as-is in Louisville" 
+                  class="w-full h-48 sm:h-56 object-cover" 
+                />
+              </div>
+              <span class="text-[11px] font-bold text-copper uppercase tracking-wider mb-1">01 &middot; Structural &amp; Cosmetic</span>
+              <h3 class="text-xl font-serif font-bold text-ink mb-2">Homes Needing Significant Repairs</h3>
+              <p class="text-xs sm:text-sm text-warm-gray leading-relaxed mb-3">
+                Roofs, old plumbing, outdated electrical panels, or wet basements. Traditional buyers request inspection concessions; we buy in present condition and take on all renovation work.
+              </p>
+              <a href="/sell-house-as-is-louisville" data-nav="sell-house-as-is-louisville" class="hover-arrow text-xs font-bold text-ink hover:text-copper underline mt-auto">
+                <span>Learn about selling As-Is</span>
+                <span class="arrow-icon">&rarr;</span>
+              </a>
             </div>
-            <div class="flex flex-col col-span-2 sm:col-span-1">
-              <span class="text-4xl sm:text-5xl font-black font-['Playfair_Display',serif] text-[#111315] tracking-tight">0%</span>
-              <span class="text-xs font-mono font-bold text-[#555964] uppercase tracking-wider mt-1">Realtor Fees ($0)</span>
+
+            <!-- Story 2: Inherited Property -->
+            <div class="reveal-text delay-150 group flex flex-col text-left">
+              <div class="rounded-xl overflow-hidden border border-border-warm double-bezel-subtle mb-4 card-zoom-wrapper">
+                <img 
+                  src="/images/situation-inherited.jpg" 
+                  alt="Inherited residential estate home in Old Louisville" 
+                  class="w-full h-48 sm:h-56 object-cover" 
+                />
+              </div>
+              <span class="text-[11px] font-bold text-copper uppercase tracking-wider mb-1">02 &middot; Probate &amp; Estates</span>
+              <h3 class="text-xl font-serif font-bold text-ink mb-2">Inherited Property in Louisville</h3>
+              <p class="text-xs sm:text-sm text-warm-gray leading-relaxed mb-3">
+                Handling a probate or family property from out-of-town or across heirs. We coordinate with estate attorneys, require zero cleanout, and ensure a dignified, clean title transfer.
+              </p>
+              <a href="/sell-inherited-house-louisville" data-nav="sell-inherited-house-louisville" class="hover-arrow text-xs font-bold text-ink hover:text-copper underline mt-auto">
+                <span>Learn about estate sales</span>
+                <span class="arrow-icon">&rarr;</span>
+              </a>
+            </div>
+
+            <!-- Story 3: Rental Properties -->
+            <div class="reveal-text delay-225 group flex flex-col text-left">
+              <div class="rounded-xl overflow-hidden border border-border-warm double-bezel-subtle mb-4 card-zoom-wrapper">
+                <img 
+                  src="/images/situation-rental.jpg" 
+                  alt="Rental property duplex in Jefferson County" 
+                  class="w-full h-48 sm:h-56 object-cover" 
+                />
+              </div>
+              <span class="text-[11px] font-bold text-copper uppercase tracking-wider mb-1">03 &middot; Landlord Fatigue</span>
+              <h3 class="text-xl font-serif font-bold text-ink mb-2">Rental Property in Jefferson County</h3>
+              <p class="text-xs sm:text-sm text-warm-gray leading-relaxed mb-3">
+                Tenants behind on rent, expiring leases, or tired of maintenance calls. We buy occupied or vacant multi-unit and single-family rentals without requiring evictions before closing.
+              </p>
+              <a href="/sell-rental-property-louisville" data-nav="sell-rental-property-louisville" class="hover-arrow text-xs font-bold text-ink hover:text-copper underline mt-auto">
+                <span>Learn about rental buyouts</span>
+                <span class="arrow-icon">&rarr;</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Secondary Editorial Index: Quieter 3-Column List for Remaining Situations -->
+          <div class="reveal-text delay-150 bg-white rounded-2xl p-6 sm:p-8 border border-border-warm double-bezel-subtle">
+            <div class="text-xs font-bold text-ink uppercase tracking-wider mb-4 border-b border-border-warm pb-2">
+              Additional Circumstances We Support
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+              <div>
+                <h4 class="font-serif font-bold text-base text-ink mb-1">Vacant &amp; Unoccupied Homes</h4>
+                <p class="text-xs text-warm-gray leading-relaxed">
+                  Stop ongoing insurance, property tax, and utility drain on an unused Kentucky property.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-serif font-bold text-base text-ink mb-1">Expedited Relocation Closings</h4>
+                <p class="text-xs text-warm-gray leading-relaxed">
+                  Job moves or sudden deadlines where waiting for 60-day mortgage underwriting is impractical.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-serif font-bold text-base text-ink mb-1">Downsizing &amp; Life Transitions</h4>
+                <p class="text-xs text-warm-gray leading-relaxed">
+                  Discreet, respectful sales without dozens of strangers walking through your home during open houses.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- 100% Full-Width Edge-to-Edge Architectural Photo -->
-        <div class="w-full relative overflow-hidden">
-          <img 
-            src="/images/situation-inherited.jpg" 
-            alt="Old Louisville Historic Property" 
-            class="w-full h-80 sm:h-[460px] object-cover select-none" 
-          />
-          <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between text-xs font-mono text-[#555964] border-b border-black/10">
-            <span>CASE STUDY: PROBATE ESTATE SALE // LOUISVILLE, KY</span>
-            <span class="font-bold text-[#111315]">REPAIRS REQUIRED: $0.00 (100% AS-IS)</span>
+          <!-- Single, Authoritative CTA After the Group (No repeated CTAs per tile) -->
+          <div class="reveal-text delay-150 mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border-warm">
+            <div class="text-xs sm:text-sm text-warm-gray text-left">
+              Have questions about your specific property or circumstance?
+            </div>
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+              <a 
+                href="/get-my-offer" 
+                data-nav="get-my-offer"
+                data-analytics-cta="get-my-offer"
+                data-location="situations_section"
+                class="btn-primary w-full sm:w-auto px-7 py-3 text-xs sm:text-sm"
+              >
+                <span>Get My Offer</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+              <a 
+                href="tel:5024903131" 
+                data-location="situations_section"
+                class="btn-secondary w-full sm:w-auto px-5 py-3 text-xs sm:text-sm"
+              >
+                <span class="material-symbols-outlined text-[17px] text-copper">call</span>
+                <span>(502) 490-3131</span>
+              </a>
+            </div>
           </div>
+
         </div>
       </section>
 
       <!-- =========================================================================
-           3. INTERACTIVE BEFORE & AFTER SLIDER (The As-Is Reality)
+           5. LOCAL PROOF & INTEGRITY BLOCK (High-Trust Editorial Statement)
            ========================================================================= -->
-      <section class="py-12 px-4 sm:px-8 max-w-7xl mx-auto w-full">
-        ${renderBeforeAfterSlider()}
+      <section class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          
+          <div class="reveal-text lg:col-span-5 relative">
+            <div class="rounded-2xl overflow-hidden border border-border-warm double-bezel card-zoom-wrapper">
+              <img 
+                src="/images/closing-table.jpg" 
+                alt="Kentucky real estate deed and closing documents at title company" 
+                class="w-full h-72 sm:h-96 object-cover" 
+              />
+              <div class="p-4 bg-white border-t border-border-warm flex items-center justify-between text-xs text-warm-gray">
+                <span class="font-bold text-ink">Independent Title Escrow</span>
+                <span>Jefferson Co. &middot; Certified Closings</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 flex flex-col items-start text-left">
+            <div class="reveal-text badge-copper mb-2">
+              <span class="beacon-dot"></span>
+              <span>Our Commitment</span>
+            </div>
+            <h2 class="reveal-text delay-75 text-3xl sm:text-4xl font-serif font-bold text-ink leading-tight mb-4">
+              A Local Team. A Clear Process.
+            </h2>
+            
+            <p class="reveal-text delay-150 text-xs sm:text-sm text-warm-gray leading-relaxed mb-4">
+              We believe selling a home should never involve misleading numbers, pressure tactics, or wholesale games. G&amp;N Investment operates as a direct private investment principal based in Kentucky.
+            </p>
+
+            <!-- Ruled Editorial Statement Box -->
+            <div class="reveal-text delay-225 p-5 sm:p-6 bg-white rounded-xl border border-border-warm double-bezel-subtle text-xs text-ink leading-relaxed flex flex-col gap-3 my-2 w-full">
+              <p class="italic text-ink/90 font-serif text-sm">
+                &ldquo;When you speak with G&amp;N Investment, you are speaking directly with the buyers who will fund the transaction and sign the deed. We review property values fairly, outline every dollar openly, and close through licensed Kentucky title companies where your funds are guaranteed.&rdquo;
+              </p>
+              <div class="pt-2 border-t border-border-warm flex items-center justify-between text-[11px] text-warm-gray font-mono">
+                <span>G&amp;N Investment Acquisitions Team</span>
+                <span>Louisville, KY</span>
+              </div>
+            </div>
+
+            <!-- Key Verifiable Facts -->
+            <div class="reveal-text delay-300 grid grid-cols-2 gap-4 w-full pt-4 text-xs">
+              <div class="flex flex-col gap-0.5">
+                <strong class="text-ink font-bold">Direct Principal Buyer</strong>
+                <span class="text-warm-gray">We buy for our own portfolio; we do not assign contracts.</span>
+              </div>
+              <div class="flex flex-col gap-0.5">
+                <strong class="text-ink font-bold">Licensed Title Partners</strong>
+                <span class="text-warm-gray">All closings executed with independent Kentucky title attorneys.</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
       </section>
 
       <!-- =========================================================================
-           4. HORIZONTAL PROPERTY SHOWCASE CAROUSEL (100% Full Width Portfolio)
+           6. COMPARISON MATRIX (Direct Buyer vs MLS Brokerage)
            ========================================================================= -->
-      <section class="py-12 sm:py-20 w-full">
-        ${renderShowcaseCarousel()}
+      <section class="py-16 sm:py-24 w-full">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          
+          <div class="max-w-2xl text-left mb-10">
+            <div class="reveal-text badge-copper mb-2">
+              <span class="beacon-dot"></span>
+              <span>Comparison</span>
+            </div>
+            <h2 class="reveal-text delay-75 text-3xl sm:text-4xl font-serif font-bold text-ink">
+              Direct Sale vs. Traditional MLS Listing
+            </h2>
+            <p class="reveal-text delay-150 text-xs sm:text-sm text-warm-gray mt-2">
+              An objective evaluation of costs, repair responsibilities, and timelines.
+            </p>
+          </div>
+
+          <div class="reveal-text delay-150">
+            ${renderComparisonTable()}
+          </div>
+
+        </div>
       </section>
 
       <!-- =========================================================================
-           5. COMPARISON MATRIX (Direct Buyer vs MLS Brokerage)
+           7. FREQUENTLY ASKED QUESTIONS
            ========================================================================= -->
-      <section class="py-12 sm:py-20 px-4 sm:px-8 max-w-6xl mx-auto w-full">
-        <div class="flex flex-col items-center text-center gap-2 mb-10 reveal">
-          <span class="text-xs font-mono uppercase tracking-widest text-[#b88a76] font-extrabold">
-            [ 03 // VALUE COMPARISON ]
-          </span>
-          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
-            DIRECT SALE <span class="text-[#b88a76]">VS.</span> MLS AGENT
+      <section class="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-8 w-full" id="faq">
+        
+        <div class="max-w-2xl text-left mb-10">
+          <div class="reveal-text badge-copper mb-2">
+            <span class="beacon-dot"></span>
+            <span>Common Questions</span>
+          </div>
+          <h2 class="reveal-text delay-75 text-3xl sm:text-4xl font-serif font-bold text-ink">
+            Frequently Asked Questions
           </h2>
-          <p class="text-sm text-[#555964] max-w-md mt-1">
-            Evaluate the real mathematical breakdown between selling direct to G&amp;N vs. the traditional market.
+          <p class="reveal-text delay-150 text-xs sm:text-sm text-warm-gray mt-2">
+            Clear, honest answers to the practical questions property owners ask us most.
           </p>
         </div>
 
-        <div class="reveal">
-          ${renderComparisonTable()}
-        </div>
-      </section>
-
-      <!-- =========================================================================
-           6. FAQ ACCORDION (High-Contrast Editorial)
-           ========================================================================= -->
-      <section class="py-12 sm:py-20 px-4 sm:px-8 max-w-4xl mx-auto w-full" id="faq">
-        <div class="flex flex-col items-center text-center gap-2 mb-10 reveal">
-          <span class="text-xs font-mono uppercase tracking-widest text-[#b88a76] font-extrabold">
-            [ 04 // CLARITY &amp; QUESTIONS ]
-          </span>
-          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#111315] font-['Playfair_Display',serif]">
-            FREQUENTLY ASKED QUESTIONS
-          </h2>
-        </div>
-
-        <div class="reveal">
+        <div class="reveal-text delay-150">
           ${renderFaqAccordion()}
         </div>
+
       </section>
 
+
+
       <!-- =========================================================================
-           7. BOTTOM COMMAND BANNER
+           9. FINAL CALL TO ACTION BANNER (Understated Confidence)
            ========================================================================= -->
-      <section class="px-4 sm:px-8 max-w-6xl mx-auto w-full mt-8 mb-4">
-        <div class="bg-[#111315] text-white rounded-2xl p-6 sm:p-10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-[#efbba5] shrink-0">
-              <span class="material-symbols-outlined text-[26px]">real_estate_agent</span>
-            </div>
-            <div class="flex flex-col">
-              <span class="text-[10px] font-mono uppercase tracking-widest text-[#efbba5] font-bold">Confidential Evaluation</span>
-              <h3 class="text-xl sm:text-2xl font-black font-['Playfair_Display',serif] text-white">Ready for a Direct Cash Valuation?</h3>
-              <p class="text-xs sm:text-sm text-gray-300">Receive your written As-Is offer with zero fees and no obligation.</p>
-            </div>
+      <section class="px-4 sm:px-8 max-w-6xl mx-auto w-full my-8">
+        <div class="reveal-text delay-75 bg-ink text-white rounded-2xl p-8 sm:p-12 double-bezel-dark flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+          
+          <div class="flex flex-col gap-2 max-w-xl">
+            <span class="text-xs font-bold uppercase tracking-wider text-soft-copper">LOUISVILLE &amp; KENTUCKY</span>
+            <h3 class="text-2xl sm:text-3xl font-serif font-bold text-white">
+              Ready to Talk About Your Property?
+            </h3>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Tell us a little about the home and we will help you understand your options. There is never any obligation to accept an offer.
+            </p>
           </div>
 
-          <div class="flex items-center gap-3 w-full sm:w-auto">
-            <a href="tel:5028007355" class="w-full sm:w-auto px-5 py-3.5 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white text-xs font-mono font-bold uppercase tracking-wider text-center transition-all">
-              Call (502) 800-SELL
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto shrink-0">
+            <a 
+              href="/get-my-offer" 
+              data-nav="get-my-offer"
+              data-analytics-cta="get-my-offer"
+              data-location="final_cta_banner"
+              class="btn-copper w-full sm:w-auto px-7 py-3.5 text-sm font-bold whitespace-nowrap"
+            >
+              <span>Get My Offer</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
-            <a href="#get-offer" data-nav="get-offer" class="shimmer-btn w-full sm:w-auto bg-[#efbba5] hover:bg-[#efbba5]/90 text-[#111315] text-xs font-extrabold uppercase tracking-widest px-7 py-3.5 rounded-full shadow-lg text-center whitespace-nowrap">
-              Get Offer →
+
+            <a 
+              href="tel:5024903131" 
+              data-location="final_cta_banner"
+              class="btn-secondary bg-white/10 hover:bg-white/20 text-white border-white/20 w-full sm:w-auto px-6 py-3.5 text-sm font-semibold"
+            >
+              <span class="material-symbols-outlined text-[18px] text-soft-copper">call</span>
+              <span>Call (502) 490-3131</span>
             </a>
           </div>
+
         </div>
       </section>
 

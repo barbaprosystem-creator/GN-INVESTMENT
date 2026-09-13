@@ -1,234 +1,134 @@
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export function renderFooter() {
-  const marqueeItems = [
-    "DIRECT CASH CAPITAL",
-    "0% REAL ESTATE COMMISSIONS",
-    "100% AS-IS ACQUISITION",
-    "LOUISVILLE & STATEWIDE",
-    "CERTIFIED TITLE CLOSING",
-    "7–14 DAY CASH WIRE",
-    "ZERO REPAIR DEMANDS",
-    "CONFIDENTIAL VALUATION"
-  ];
-
-  const marqueeHTML = marqueeItems
-    .map((item) => `<span>${item}</span> <span class="text-[#efbba5]">✦</span>`)
-    .join(' ');
-
   return `
-    <!-- Cinematic Curtain Reveal Footer System -->
-    <div class="relative w-full overflow-hidden cinematic-footer-wrapper mt-20 pt-8 border-t border-white/10" id="cinematicFooter">
-      <footer class="relative flex min-h-[85vh] sm:min-h-[90vh] w-full flex-col justify-between overflow-hidden bg-[#0d1016] text-[#f3f4f6] pb-36 sm:pb-28 md:pb-12 pt-14 sm:pt-16">
+    <footer class="w-full bg-ink text-white/90 pt-16 pb-28 md:pb-16 border-t border-white/10 mt-16 sm:mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
         
-        <!-- Ambient Aurora Glow & Theme-adaptive Grid Background -->
-        <div class="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[85vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[100px] pointer-events-none z-0"></div>
-        <div class="footer-bg-grid absolute inset-0 z-0 pointer-events-none"></div>
-
-        <!-- Giant Background Text: GN INVESTMENTS (Fully fitted on Mobile & Desktop) -->
-        <div id="footerGiantText" class="footer-giant-bg-text absolute bottom-36 sm:bottom-16 md:-bottom-[1vh] inset-x-0 mx-auto w-full z-0 pointer-events-none select-none text-center flex flex-col items-center justify-center">
-          <div class="sm:hidden flex flex-col items-center">
-            <span class="text-[17vw] font-black tracking-tight leading-[0.8] block">GN</span>
-            <span class="text-[12vw] font-black tracking-tight leading-[0.8] block">INVESTMENTS</span>
-          </div>
-          <span class="hidden sm:block text-[14vw] md:text-[18vw] font-black tracking-tighter whitespace-nowrap">GN INVESTMENTS</span>
-        </div>
-
-        <!-- 1. Diagonal Sleek Marquee (Top of footer) -->
-        <div class="relative w-full overflow-hidden border-y border-white/10 bg-[#12151b]/80 backdrop-blur-md py-4 z-10 -rotate-1 scale-105 shadow-2xl mb-8">
-          <div class="flex w-max animate-footer-scroll-marquee text-xs md:text-sm font-bold tracking-[0.25em] text-gray-400 font-mono uppercase space-x-8">
-            <div class="flex items-center space-x-8 px-4">
-              ${marqueeHTML}
-            </div>
-            <div class="flex items-center space-x-8 px-4">
-              ${marqueeHTML}
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. Main Center Content -->
-        <div class="relative z-10 flex flex-1 flex-col items-center justify-center px-4 sm:px-6 my-auto w-full max-w-5xl mx-auto text-center">
+        <!-- Top Row: Brand Summary + Main Call to Action -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-12 border-b border-white/10">
           
-          <!-- Monumental Glowing Brand Seal (Doubled in Size) -->
-          <div class="mb-6 flex flex-col items-center group">
-            <img 
-              src="/images/gn-logo-transparent.png" 
-              alt="G&N Investment Official Emblem" 
-              class="h-32 sm:h-48 md:h-52 w-auto object-contain filter drop-shadow-[0_0_50px_rgba(239,187,165,0.5)] transition-transform duration-500 group-hover:scale-105" 
-            />
+          <div class="flex flex-col gap-3 max-w-xl">
+            <div class="flex items-center gap-3">
+              <img 
+                src="/images/gn-logo-transparent.png" 
+                alt="G&N Investment Emblem" 
+                class="h-10 sm:h-12 w-auto object-contain brightness-110" 
+              />
+              <span class="text-xl sm:text-2xl font-serif font-bold tracking-tight text-white">
+                G&amp;N Investment
+              </span>
+            </div>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              We are a local real estate investment company buying residential houses directly in Louisville, Jefferson County, and throughout Kentucky. Sell as-is with zero agent commissions, no repairs, and a closing timeline tailored to your needs.
+            </p>
           </div>
 
-          <span id="footerBadge" class="text-xs font-mono uppercase tracking-widest text-[#efbba5] font-bold mb-3 inline-flex items-center gap-2 bg-[#181c26]/90 px-4 py-1.5 rounded-full border border-white/10 shadow-lg">
-            <span class="status-dot"></span> NEXT STEPS // KENTUCKY REAL ESTATE
-          </span>
+          <!-- Quick Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3">
+            <a 
+              href="tel:5024903131" 
+              data-location="footer"
+              class="btn-secondary bg-white/10 hover:bg-white/20 text-white border-white/20 px-5 py-3 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-[18px] text-soft-copper">call</span>
+              <span>Call (502) 490-3131</span>
+            </a>
 
-          <h2 id="footerHeading" class="text-4xl sm:text-6xl md:text-8xl font-black footer-text-glow tracking-tight mb-8 text-center font-['Playfair_Display',serif]">
-            Ready To Sell?
-          </h2>
-
-          <!-- Interactive Magnetic Action Pills -->
-          <div id="footerLinks" class="flex flex-col items-center gap-4 sm:gap-6 w-full max-w-2xl">
-            
-            <!-- Primary Action Links -->
-            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 w-full">
-              <a 
-                href="#get-offer" 
-                data-nav="get-offer" 
-                class="magnetic-btn footer-glass-pill px-8 sm:px-10 py-4 sm:py-5 rounded-full text-white font-bold text-xs sm:text-base flex items-center gap-3 group bg-gradient-to-tr from-primary to-[#efbba5] text-[#12151b] shadow-xl shadow-primary/30 border border-white/30 cursor-pointer"
-              >
-                <span class="material-symbols-outlined text-[20px] text-white">local_offer</span>
-                <span class="text-white uppercase tracking-wider font-extrabold">Get Cash Offer</span>
-                <span class="material-symbols-outlined text-[18px] text-white transition-transform group-hover:translate-x-1">arrow_forward</span>
-              </a>
-
-              <a 
-                href="tel:5028007355" 
-                class="magnetic-btn footer-glass-pill px-8 sm:px-10 py-4 sm:py-5 rounded-full text-white font-bold text-xs sm:text-base flex items-center gap-3 group cursor-pointer"
-              >
-                <span class="material-symbols-outlined text-[20px] text-[#efbba5]">call</span>
-                <span class="uppercase tracking-wider">Call (502) 800-SELL</span>
-              </a>
-            </div>
-
-            <!-- Secondary Text Navigation Links -->
-            <div class="flex flex-wrap justify-center gap-2.5 sm:gap-4 w-full mt-2 text-xs">
-              <a href="#home" data-nav="home" class="magnetic-btn footer-glass-pill px-5 py-2.5 rounded-full text-gray-300 hover:text-white font-medium">Home</a>
-              <a href="#how-it-works" data-nav="how-it-works" class="magnetic-btn footer-glass-pill px-5 py-2.5 rounded-full text-gray-300 hover:text-white font-medium">Process</a>
-              <a href="#situations" data-nav="situations" class="magnetic-btn footer-glass-pill px-5 py-2.5 rounded-full text-gray-300 hover:text-white font-medium">Situations</a>
-              <a href="#about" data-nav="about" class="magnetic-btn footer-glass-pill px-5 py-2.5 rounded-full text-gray-300 hover:text-white font-medium">About Us</a>
-              <a href="#privacy" data-nav="privacy" class="magnetic-btn footer-glass-pill px-5 py-2.5 rounded-full text-gray-400 hover:text-white font-medium">Privacy</a>
-              <a href="#terms" data-nav="terms" class="magnetic-btn footer-glass-pill px-5 py-2.5 rounded-full text-gray-400 hover:text-white font-medium">Terms</a>
-            </div>
-
+            <a 
+              href="/get-my-offer" 
+              data-nav="get-my-offer"
+              data-analytics-cta="get-my-offer"
+              data-location="footer"
+              class="btn-copper px-6 py-3 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2"
+            >
+              <span>Get My Offer</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
           </div>
+
         </div>
 
-        <!-- 3. Bottom Bar / Credits -->
-        <div class="relative z-20 w-full pt-8 px-6 sm:px-12 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/10 mt-8">
+        <!-- Middle Columns: Navigation & Local Services -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 py-10 text-sm border-b border-white/10">
           
-          <!-- Copyright -->
-          <div class="text-gray-400 text-[10px] sm:text-xs font-mono font-semibold tracking-wider uppercase order-2 md:order-1 text-center sm:text-left">
-            &copy; ${new Date().getFullYear()} G&amp;N Investment LLC. Direct Real Estate Buyers.
+          <!-- Column 1: Navigation -->
+          <div class="flex flex-col gap-2.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-soft-copper font-sans">Explore</span>
+            <a href="/" data-nav="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+            <a href="/how-it-works" data-nav="how-it-works" class="text-gray-300 hover:text-white transition-colors">How It Works</a>
+            <a href="/situations" data-nav="situations" class="text-gray-300 hover:text-white transition-colors">Common Situations</a>
+            <a href="/about" data-nav="about" class="text-gray-300 hover:text-white transition-colors">About G&amp;N Investment</a>
+            <a href="/get-my-offer" data-nav="get-my-offer" class="text-gray-300 hover:text-white transition-colors font-bold text-soft-copper">Get My Offer</a>
           </div>
 
-          <!-- Crafted Badge -->
-          <div class="footer-glass-pill px-5 py-2 rounded-full flex items-center gap-2 order-1 md:order-2 cursor-default border-white/10">
-            <span class="text-gray-400 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">Louisville</span>
-            <span class="animate-footer-heartbeat text-sm text-red-500">❤</span>
-            <span class="text-gray-400 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">Kentucky</span>
+          <!-- Column 2: Local Kentucky Areas -->
+          <div class="flex flex-col gap-2.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-soft-copper font-sans">Kentucky Focus</span>
+            <a href="/sell-my-house-louisville-ky" data-nav="sell-my-house-louisville-ky" class="text-gray-300 hover:text-white transition-colors">Louisville Metro</a>
+            <a href="/sell-house-as-is-louisville" data-nav="sell-house-as-is-louisville" class="text-gray-300 hover:text-white transition-colors">Sell As-Is Louisville</a>
+            <span class="text-gray-400">Jefferson County</span>
+            <span class="text-gray-400">Oldham &amp; Bullitt Counties</span>
+            <span class="text-gray-400">Lexington &amp; Central KY</span>
           </div>
 
-          <!-- Back To Top Button -->
-          <button 
-            type="button" 
-            id="footerBackToTopBtn" 
-            class="magnetic-btn w-10 h-10 sm:w-11 sm:h-11 rounded-full footer-glass-pill flex items-center justify-center text-gray-300 hover:text-[#efbba5] group order-3 cursor-pointer"
-            aria-label="Back to Top"
-          >
-            <span class="material-symbols-outlined text-[20px] transition-transform group-hover:-translate-y-1">arrow_upward</span>
-          </button>
+          <!-- Column 3: Property Scenarios -->
+          <div class="flex flex-col gap-2.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-soft-copper font-sans">Selling Situations</span>
+            <a href="/sell-house-as-is-louisville" data-nav="sell-house-as-is-louisville" class="text-gray-300 hover:text-white transition-colors">Homes Needing Repairs</a>
+            <a href="/sell-inherited-house-louisville" data-nav="sell-inherited-house-louisville" class="text-gray-300 hover:text-white transition-colors">Inherited &amp; Estate Homes</a>
+            <a href="/sell-rental-property-louisville" data-nav="sell-rental-property-louisville" class="text-gray-300 hover:text-white transition-colors">Rental &amp; Tenant Properties</a>
+            <a href="/situations" data-nav="situations" class="text-gray-300 hover:text-white transition-colors">Urgent Timeline Closings</a>
+          </div>
+
+          <!-- Column 4: Contact & Portal -->
+          <div class="flex flex-col gap-2.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-soft-copper font-sans">Contact &amp; Hours</span>
+            <div class="flex items-center gap-2 text-gray-300">
+              <span class="material-symbols-outlined text-[18px] text-soft-copper">phone</span>
+              <a href="tel:5024903131" class="hover:text-white">(502) 490-3131</a>
+            </div>
+            <div class="flex items-center gap-2 text-gray-300">
+              <span class="material-symbols-outlined text-[18px] text-soft-copper">location_on</span>
+              <span>Louisville, KY</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-300">
+              <span class="material-symbols-outlined text-[18px] text-soft-copper">schedule</span>
+              <span>Mon – Sat: 8:00 AM – 7:00 PM</span>
+            </div>
+            <div class="pt-2">
+              <a href="/login" data-nav="login" class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-soft-copper transition-colors">
+                <span class="material-symbols-outlined text-[15px]">lock</span>
+                <span>Employee Portal / CRM</span>
+              </a>
+            </div>
+          </div>
 
         </div>
-      </footer>
-    </div>
+
+        <!-- Bottom Row: Real Estate Legal Disclaimer & Copyright -->
+        <div class="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-gray-400">
+          
+          <div class="max-w-3xl leading-relaxed">
+            <p>
+              <strong>Disclaimer:</strong> G&amp;N Investment LLC is a private real estate investment company. We purchase properties directly for investment, renovation, and long-term portfolio purposes. We are not licensed real estate brokers or agents acting as your representative, and we do not charge real estate commissions. All purchases are formalized with written agreements and executed through independent, licensed Kentucky title companies.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-4 shrink-0">
+            <a href="/privacy" data-nav="privacy" class="hover:text-white underline">Privacy Policy</a>
+            <a href="/terms" data-nav="terms" class="hover:text-white underline">Terms of Service</a>
+          </div>
+
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/5 text-center text-[11px] text-gray-500">
+          &copy; ${new Date().getFullYear()} G&amp;N Investment LLC. All rights reserved. Equal Housing Opportunity.
+        </div>
+
+      </div>
+    </footer>
   `;
 }
 
 export function initFooter() {
-  const footerWrapper = document.getElementById('cinematicFooter');
-  const giantText = document.getElementById('footerGiantText');
-  const heading = document.getElementById('footerHeading');
-  const badge = document.getElementById('footerBadge');
-  const links = document.getElementById('footerLinks');
-  const backToTopBtn = document.getElementById('footerBackToTopBtn');
-
-  if (!footerWrapper) return;
-
-  // 1. GSAP ScrollTrigger Background Parallax on Giant Text
-  if (giantText) {
-    gsap.fromTo(
-      giantText,
-      { y: '8vh', scale: 0.8, opacity: 0 },
-      {
-        y: '0vh',
-        scale: 1,
-        opacity: 1,
-        ease: 'power1.out',
-        scrollTrigger: {
-          trigger: footerWrapper,
-          start: 'top 85%',
-          end: 'bottom bottom',
-          scrub: 1.2,
-        },
-      }
-    );
-  }
-
-  // 2. GSAP ScrollTrigger Staggered Content Reveal on Heading and Actions
-  if (heading && links) {
-    gsap.fromTo(
-      [badge, heading, links],
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: footerWrapper,
-          start: 'top 65%',
-          end: 'bottom 90%',
-          scrub: 1,
-        },
-      }
-    );
-  }
-
-  // 3. Back to Top Click Handler
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // 4. Zero-dependency Magnetic Button Physics on Desktop
-  if (window.innerWidth >= 768) {
-    const magneticBtns = footerWrapper.querySelectorAll('.magnetic-btn');
-    magneticBtns.forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const h = rect.width / 2;
-        const w = rect.height / 2;
-        const x = e.clientX - rect.left - h;
-        const y = e.clientY - rect.top - w;
-
-        gsap.to(btn, {
-          x: x * 0.35,
-          y: y * 0.35,
-          rotationX: -y * 0.1,
-          rotationY: x * 0.1,
-          scale: 1.04,
-          ease: 'power2.out',
-          duration: 0.35,
-        });
-      });
-
-      btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, {
-          x: 0,
-          y: 0,
-          rotationX: 0,
-          rotationY: 0,
-          scale: 1,
-          ease: 'elastic.out(1, 0.3)',
-          duration: 1.1,
-        });
-      });
-    });
-  }
+  // Clean initialization if needed for back-to-top or event tracking
 }

@@ -209,36 +209,10 @@
 }
 
 /* =========================================
-   MOBILE BOTTOM STICKY BAR
+   MOBILE BOTTOM STICKY BAR (ELIMINATED)
    ========================================= */
 .mobile-bottom-bar {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(13, 18, 25, 0.96);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 0.75rem 1rem;
-  z-index: 990;
-  border-top: 1px solid rgba(197, 131, 43, 0.3);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.mobile-bottom-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 0.75rem;
-}
-
-@media (max-width: 768px) {
-  .mobile-bottom-bar {
-    display: block;
-  }
-  body {
-    padding-bottom: 70px;
-  }
+  display: none !important;
 }
 
 /* =========================================
