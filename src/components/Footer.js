@@ -35,7 +35,7 @@ export function renderFooter() {
 
             <a 
               href="/get-my-offer" 
-              data-nav="get-my-offer"
+              data-nav="/get-my-offer"
               data-analytics-cta="get-my-offer"
               data-location="footer"
               class="btn-copper px-6 py-3 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2"
@@ -57,7 +57,7 @@ export function renderFooter() {
             <a href="/how-it-works" data-nav="how-it-works" class="text-gray-300 hover:text-white transition-colors">How It Works</a>
             <a href="/situations" data-nav="situations" class="text-gray-300 hover:text-white transition-colors">Common Situations</a>
             <a href="/about" data-nav="about" class="text-gray-300 hover:text-white transition-colors">About G&amp;N Investment</a>
-            <a href="/get-my-offer" data-nav="get-my-offer" class="text-gray-300 hover:text-white transition-colors font-bold text-soft-copper">Get My Offer</a>
+            <a href="/get-my-offer" data-nav="/get-my-offer" class="text-gray-300 hover:text-white transition-colors font-bold text-soft-copper">Get My Offer</a>
           </div>
 
           <!-- Column 2: Local Kentucky Areas -->

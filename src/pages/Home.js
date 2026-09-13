@@ -196,7 +196,7 @@ export function renderHomePage() {
             <div class="flex items-center gap-3 w-full sm:w-auto">
               <a 
                 href="/get-my-offer" 
-                data-nav="get-my-offer"
+                data-nav="/get-my-offer"
                 data-analytics-cta="get-my-offer"
                 data-location="situations_section"
                 class="btn-primary w-full sm:w-auto px-7 py-3 text-xs sm:text-sm"
@@ -350,7 +350,7 @@ export function renderHomePage() {
           <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto shrink-0">
             <a 
               href="/get-my-offer" 
-              data-nav="get-my-offer"
+              data-nav="/get-my-offer"
               data-analytics-cta="get-my-offer"
               data-location="final_cta_banner"
               class="btn-copper w-full sm:w-auto px-7 py-3.5 text-sm font-bold whitespace-nowrap"

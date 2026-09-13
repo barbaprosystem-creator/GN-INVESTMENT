@@ -101,7 +101,7 @@ export function renderHowItWorksPage() {
           <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto mt-2">
             <a 
               href="/get-my-offer" 
-              data-nav="get-my-offer"
+              data-nav="/get-my-offer"
               data-analytics-cta="get-my-offer"
               data-location="how_it_works_page"
               class="btn-primary w-full sm:w-auto px-8 py-3.5"

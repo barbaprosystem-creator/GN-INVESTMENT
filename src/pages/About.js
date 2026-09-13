@@ -86,7 +86,7 @@ export function renderAboutPage() {
           <div class="flex flex-col sm:flex-row items-center gap-3 mt-2 w-full sm:w-auto">
             <a 
               href="/get-my-offer" 
-              data-nav="get-my-offer"
+              data-nav="/get-my-offer"
               data-analytics-cta="get-my-offer"
               data-location="about_page_bottom"
               class="btn-primary w-full sm:w-auto px-8 py-3.5"

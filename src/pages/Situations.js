@@ -98,7 +98,7 @@ export function renderSituationsPage() {
               <div class="pt-4 border-t border-border-warm/60 flex items-center justify-between">
                 <a 
                   href="/get-my-offer" 
-                  data-nav="get-my-offer"
+                  data-nav="/get-my-offer"
                   data-analytics-cta="get-my-offer"
                   data-location="situations_page_card"
                   class="btn-primary py-2.5 px-5 text-xs font-bold"
@@ -128,7 +128,7 @@ export function renderSituationsPage() {
           <div class="flex flex-col sm:flex-row items-center gap-3 mt-2 w-full sm:w-auto">
             <a 
               href="/get-my-offer" 
-              data-nav="get-my-offer"
+              data-nav="/get-my-offer"
               data-analytics-cta="get-my-offer"
               data-location="situations_page_bottom"
               class="btn-copper w-full sm:w-auto px-7 py-3.5 text-sm font-bold"

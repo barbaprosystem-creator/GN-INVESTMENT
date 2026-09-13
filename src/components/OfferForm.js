@@ -113,14 +113,14 @@ export function renderOfferForm(options = {}) {
             <span>No obligation. We’ll only use your information to discuss your property.</span>
           </div>
 
-          <!-- Continue Button -->
+          <!-- Continue / Get My Offer Button -->
           <div class="pt-1">
             <button 
               type="button" 
               id="${formId}_btnContinue" 
-              class="btn-primary w-full py-3.5 text-sm sm:text-base flex items-center justify-center gap-2"
+              class="btn-copper w-full py-3.5 text-sm sm:text-base font-bold flex items-center justify-center gap-2 cursor-pointer shadow-copper"
             >
-              <span>Continue</span>
+              <span id="${formId}_btnContinueText">Get My Offer &rarr;</span>
               <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
             </button>
           </div>
@@ -235,9 +235,9 @@ export function renderOfferForm(options = {}) {
             <button 
               type="submit" 
               id="${formId}_btnSubmit" 
-              class="btn-copper w-full py-3.5 text-sm sm:text-base font-bold flex items-center justify-center gap-2"
+              class="btn-copper w-full py-3.5 text-sm sm:text-base font-bold flex items-center justify-center gap-2 cursor-pointer shadow-copper"
             >
-              <span id="${formId}_btnSubmitText">Get My Offer</span>
+              <span id="${formId}_btnSubmitText">Submit Offer Request</span>
               <span class="material-symbols-outlined text-[18px]">send</span>
             </button>
           </div>
@@ -291,7 +291,7 @@ export function initOfferForm(formId = 'offerCaptureForm') {
     }
   }
 
-  // Clear errors and track start on user input
+  // Clear errors and track start on user input, support Enter key on Step 1
   [addressInput, nameInput, phoneInput, emailInput].forEach((input) => {
     if (input) {
       input.addEventListener('focus', markFormStarted, { once: true });
@@ -299,6 +299,12 @@ export function initOfferForm(formId = 'offerCaptureForm') {
         input.classList.remove('error');
         const errEl = document.getElementById(`${input.id}_error`);
         if (errEl) errEl.classList.add('hidden');
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (btnContinue) btnContinue.click();
+        }
       });
     }
   });
@@ -382,6 +388,17 @@ export function initOfferForm(formId = 'offerCaptureForm') {
     });
   }
 
+  // Direct click handler on Submit button to safeguard against event capture issues
+  if (btnSubmit) {
+    btnSubmit.addEventListener('click', (e) => {
+      // If clicked while step 1 is active, advance to step 2 first
+      if (step1 && !step1.classList.contains('hidden')) {
+        e.preventDefault();
+        if (btnContinue) btnContinue.click();
+      }
+    });
+  }
+
   // Form Submission
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -390,6 +407,14 @@ export function initOfferForm(formId = 'offerCaptureForm') {
     const fullName = nameInput?.value.trim() || '';
     const phone = phoneInput?.value.trim() || '';
     const email = emailInput?.value.trim() || '';
+
+    // If core fields are missing, return cleanly to step 1
+    if (!address || address.length < 3 || !fullName || fullName.length < 2 || !phone || phone.replace(/\D/g, '').length < 7) {
+      step2.classList.add('hidden');
+      step1.classList.remove('hidden');
+      if (btnContinue) btnContinue.click();
+      return;
+    }
 
     const propertyType = document.getElementById(`${formId}_propertyType`)?.value || 'Single Family Home';
     const bedrooms = document.getElementById(`${formId}_bedrooms`)?.value || '';
@@ -438,7 +463,7 @@ export function initOfferForm(formId = 'offerCaptureForm') {
     await new Promise((resolve) => setTimeout(resolve, 400));
 
     if (btnSubmit) btnSubmit.disabled = false;
-    if (btnSubmitText) btnSubmitText.innerText = 'Get My Offer';
+    if (btnSubmitText) btnSubmitText.innerText = 'Submit Offer Request';
 
     const modal = document.getElementById('quickOfferModal');
     if (modal) {

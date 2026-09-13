@@ -110,6 +110,24 @@
   transform: translateX(3px);
 }
 
+/* Hero Wall Card & CTA Direct Interactivity */
+#portalWallLayer {
+  pointer-events: none;
+}
+#portalWallLayer.is-interactive,
+#portalWallLayer.is-interactive #portalWallCard,
+#portalWallLayer.is-interactive #wallActions,
+#portalWallLayer.is-interactive #portalCtaBtn {
+  pointer-events: auto !important;
+}
+#portalCtaBtn {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 50;
+  touch-action: manipulation;
+}
+
 /* Modal System */
 .modal-overlay {
   position: fixed;

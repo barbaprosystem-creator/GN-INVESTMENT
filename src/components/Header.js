@@ -40,7 +40,10 @@ export function renderHeader() {
           </a>
           <a 
             href="/get-my-offer" 
+            id="headerGetOfferBtn"
             data-nav="/get-my-offer" 
+            data-analytics-cta="get-my-offer"
+            data-location="header_nav"
             class="shimmer-btn bg-[#111315] hover:bg-[#252a35] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full shadow-md shadow-black/10 hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-1 sm:gap-1.5 cursor-pointer whitespace-nowrap shrink-0"
           >
             <span>GET OFFER</span>
@@ -68,8 +71,11 @@ export function renderHeader() {
           <div class="pt-3 flex flex-col gap-2.5">
             <a 
               href="/get-my-offer" 
+              id="mobileGetOfferBtn"
               data-nav="/get-my-offer" 
-              class="btn-copper py-3 text-center text-xs font-bold uppercase tracking-wider rounded-full shadow-md flex items-center justify-center gap-2"
+              data-analytics-cta="get-my-offer"
+              data-location="mobile_menu"
+              class="btn-copper py-3 text-center text-xs font-bold uppercase tracking-wider rounded-full shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Get My Offer</span>
               <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
@@ -136,4 +142,23 @@ export function initHeader() {
       closeMenu();
     }
   });
+
+  // Dedicated Get Offer smooth scroll handler when on Home page
+  const handleGetOffer = (e) => {
+    const offerSection = document.getElementById('homeOfferSection');
+    if (offerSection) {
+      e.preventDefault();
+      closeMenu();
+      offerSection.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const addr = document.getElementById('homeOfferForm_address');
+        if (addr) addr.focus();
+      }, 500);
+    }
+  };
+
+  const deskCta = document.getElementById('headerGetOfferBtn');
+  const mobCta = document.getElementById('mobileGetOfferBtn');
+  if (deskCta) deskCta.addEventListener('click', handleGetOffer);
+  if (mobCta) mobCta.addEventListener('click', handleGetOffer);
 }

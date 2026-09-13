@@ -140,9 +140,9 @@ export function renderPortalHero() {
               class="flex flex-row items-center gap-2 sm:gap-4 mt-3 sm:mt-6"
             >
               <a 
-                href="/get-my-offer" 
+                href="#homeOfferSection" 
                 id="portalCtaBtn"
-                data-nav="/get-my-offer"
+                data-nav="#homeOfferSection"
                 data-analytics-cta="get-my-offer" 
                 data-location="portal_hero_wall" 
                 class="btn-copper py-2.5 sm:py-3.5 px-4 sm:px-8 text-xs sm:text-base font-bold shadow-lifted inline-flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer whitespace-nowrap"
@@ -542,10 +542,10 @@ export function initPortalHero() {
     rafId = requestAnimationFrame(render);
   }
 
-  // Header visibility helper: remains strictly hidden during the entire hero sequence
+  // Header visibility helper: remains strictly hidden during hero, reveals fluidly as hero transitions out
   function updateHeaderVisibility(progress, rectBottom) {
     const adminContainer = document.getElementById('portalAdminContainer');
-    const isPastHero = rectBottom <= 0 && progress >= 0.99;
+    const isPastHero = (rectBottom <= window.innerHeight * 0.5) || progress >= 0.94;
     if (header) {
       if (isPastHero) {
         header.style.opacity = '1';
@@ -568,8 +568,26 @@ export function initPortalHero() {
     }
   }
 
+  // Wall interactivity helper: ensures pointer-events are enabled whenever the card is visible
+  function updateWallInteractivity(progress) {
+    if (progress >= 0.24 && progress <= 0.42) {
+      if (wallLayer) {
+        wallLayer.classList.add('is-interactive');
+        wallLayer.style.pointerEvents = 'auto';
+      }
+    } else {
+      if (wallLayer) {
+        wallLayer.classList.remove('is-interactive');
+        if (progress < 0.22 || progress > 0.44) {
+          wallLayer.style.pointerEvents = 'none';
+        }
+      }
+    }
+  }
+
   // Direct native scroll tracker as absolute guarantee of progress updates
   function updateScrollProgressDirectly() {
+    if (!section.isConnected) return;
     const rect = section.getBoundingClientRect();
     const totalScrollable = rect.height - window.innerHeight;
     if (totalScrollable > 0) {
@@ -578,11 +596,31 @@ export function initPortalHero() {
     }
 
     handleProgressivePreload(targetProgress);
+    updateWallInteractivity(targetProgress);
     updateHeaderVisibility(targetProgress, rect.bottom);
   }
 
   window.addEventListener('scroll', updateScrollProgressDirectly, { passive: true });
   window.addEventListener('resize', () => { needsRedraw = true; }, { passive: true });
+
+  // Direct click handler on Hero Wall CTA button for foolproof responsiveness
+  const portalCtaBtn = document.getElementById('portalCtaBtn');
+  if (portalCtaBtn) {
+    portalCtaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const target = document.getElementById('homeOfferSection');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          const addr = document.getElementById('homeOfferForm_address');
+          if (addr) addr.focus();
+        }, 500);
+      } else {
+        window.location.href = '/get-my-offer';
+      }
+    });
+  }
 
   startRenderLoop();
 
@@ -615,6 +653,7 @@ export function initPortalHero() {
       onUpdate: (self) => {
         targetProgress = self.progress;
         handleProgressivePreload(self.progress);
+        updateWallInteractivity(self.progress);
         updateHeaderVisibility(self.progress, section.getBoundingClientRect().bottom);
       },
       onLeave: () => {
@@ -786,6 +825,11 @@ export function initPortalHero() {
     window.removeEventListener('scroll', updateScrollProgressDirectly);
     if (mediaWatcher.removeEventListener) {
       mediaWatcher.removeEventListener('change', handleMediaChange);
+    }
+    if (header) {
+      header.style.opacity = '1';
+      header.style.pointerEvents = 'auto';
+      header.style.transform = 'translateY(0)';
     }
   };
 }

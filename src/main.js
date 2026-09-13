@@ -34,6 +34,9 @@ const appState = {
   selectedAddress: ''
 };
 
+// Tracks active PortalHero cleanup callback to prevent detached animation leaks
+let currentHeroCleanup = null;
+
 // Route Metadata for SEO
 const ROUTE_SEO = {
   '/': {
@@ -225,6 +228,34 @@ function navigateToRoute(route, pushState = true) {
     cleanRoute = '/get-my-offer';
   }
 
+  // If user is already on Home and requests Get My Offer, smoothly glide to the on-page form
+  if (cleanRoute === '/get-my-offer' && appState.currentPath === '/') {
+    const homeOfferSection = document.getElementById('homeOfferSection');
+    if (homeOfferSection) {
+      homeOfferSection.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const addr = document.getElementById('homeOfferForm_address');
+        if (addr) addr.focus();
+      }, 500);
+      return;
+    }
+  }
+
+  // Cleanly teardown any active Hero animation & ScrollTrigger before swapping views
+  if (currentHeroCleanup) {
+    try {
+      currentHeroCleanup();
+    } catch (err) {
+      console.warn('Hero cleanup warning:', err);
+    }
+    currentHeroCleanup = null;
+  }
+  if (typeof ScrollTrigger !== 'undefined') {
+    try {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    } catch (err) {}
+  }
+
   appState.currentPath = cleanRoute;
 
   if (pushState && window.location.pathname !== cleanRoute) {
@@ -323,13 +354,13 @@ function navigateToRoute(route, pushState = true) {
   } else {
     // Default: Home Page
     contentEl.innerHTML = renderHomePage();
-    initPortalHero();
+    currentHeroCleanup = initPortalHero();
     initOfferForm('homeOfferForm');
     initFaqAccordion();
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  // Ensure header is visible on non-home pages
+  // Ensure header is fully visible and interactive on non-home pages
   const header = document.getElementById('siteHeader') || document.querySelector('header');
   if (cleanRoute !== '/') {
     if (header) {
@@ -376,6 +407,28 @@ function initApp() {
     // Skip tel, mailto, javascript, external links
     if (hrefAttr && (hrefAttr.startsWith('tel:') || hrefAttr.startsWith('mailto:') || hrefAttr.startsWith('http'))) {
       return;
+    }
+
+    // Special handling for Get My Offer CTAs: on Home page, smoothly scroll to the offer form
+    const isOfferCta = target.id === 'portalCtaBtn' || 
+                       target.getAttribute('data-analytics-cta') === 'get-my-offer' || 
+                       navAttr === '/get-my-offer' || 
+                       navAttr === 'get-my-offer' || 
+                       hrefAttr === '/get-my-offer' || 
+                       hrefAttr === '#homeOfferSection';
+
+    if (isOfferCta) {
+      const homeOfferSection = document.getElementById('homeOfferSection');
+      if (homeOfferSection) {
+        e.preventDefault();
+        e.stopPropagation();
+        homeOfferSection.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          const addr = document.getElementById('homeOfferForm_address');
+          if (addr) addr.focus();
+        }, 500);
+        return;
+      }
     }
 
     // Handle smooth scrolling for local on-page hash anchors
