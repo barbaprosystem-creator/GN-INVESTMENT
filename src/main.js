@@ -228,19 +228,6 @@ function navigateToRoute(route, pushState = true) {
     cleanRoute = '/get-my-offer';
   }
 
-  // If user is already on Home and requests Get My Offer, smoothly glide to the on-page form
-  if (cleanRoute === '/get-my-offer' && appState.currentPath === '/') {
-    const homeOfferSection = document.getElementById('homeOfferSection');
-    if (homeOfferSection) {
-      homeOfferSection.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => {
-        const addr = document.getElementById('homeOfferForm_address');
-        if (addr) addr.focus();
-      }, 500);
-      return;
-    }
-  }
-
   // Cleanly teardown any active Hero animation & ScrollTrigger before swapping views
   if (currentHeroCleanup) {
     try {
@@ -409,28 +396,6 @@ function initApp() {
       return;
     }
 
-    // Special handling for Get My Offer CTAs: on Home page, smoothly scroll to the offer form
-    const isOfferCta = target.id === 'portalCtaBtn' || 
-                       target.getAttribute('data-analytics-cta') === 'get-my-offer' || 
-                       navAttr === '/get-my-offer' || 
-                       navAttr === 'get-my-offer' || 
-                       hrefAttr === '/get-my-offer' || 
-                       hrefAttr === '#homeOfferSection';
-
-    if (isOfferCta) {
-      const homeOfferSection = document.getElementById('homeOfferSection');
-      if (homeOfferSection) {
-        e.preventDefault();
-        e.stopPropagation();
-        homeOfferSection.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => {
-          const addr = document.getElementById('homeOfferForm_address');
-          if (addr) addr.focus();
-        }, 500);
-        return;
-      }
-    }
-
     // Handle smooth scrolling for local on-page hash anchors
     if (hrefAttr && hrefAttr.startsWith('#') && !navAttr) {
       const anchorId = hrefAttr.substring(1);
@@ -446,6 +411,13 @@ function initApp() {
     if (route) {
       e.preventDefault();
       navigateToRoute(route, true);
+    }
+  });
+
+  // Global Custom Navigation Dispatch Listener
+  window.addEventListener('app:navigate', (e) => {
+    if (e.detail && e.detail.route) {
+      navigateToRoute(e.detail.route, true);
     }
   });
 

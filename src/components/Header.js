@@ -143,18 +143,11 @@ export function initHeader() {
     }
   });
 
-  // Dedicated Get Offer smooth scroll handler when on Home page
+  // Dedicated Get Offer handler to cleanly route to /get-my-offer
   const handleGetOffer = (e) => {
-    const offerSection = document.getElementById('homeOfferSection');
-    if (offerSection) {
-      e.preventDefault();
-      closeMenu();
-      offerSection.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => {
-        const addr = document.getElementById('homeOfferForm_address');
-        if (addr) addr.focus();
-      }, 500);
-    }
+    e.preventDefault();
+    closeMenu();
+    window.dispatchEvent(new CustomEvent('app:navigate', { detail: { route: '/get-my-offer' } }));
   };
 
   const deskCta = document.getElementById('headerGetOfferBtn');

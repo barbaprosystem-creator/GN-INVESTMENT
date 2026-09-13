@@ -123,6 +123,8 @@
   pointer-events: auto !important;
   position: relative;
   z-index: 70 !important;
+  transform: translateZ(20px);
+  -webkit-transform: translateZ(20px);
 }
 #portalCtaBtn,
 #portalPhoneBtn {
@@ -133,6 +135,8 @@
   touch-action: manipulation;
   user-select: none;
   -webkit-user-select: none;
+  transform: translateZ(30px);
+  -webkit-transform: translateZ(30px);
 }
 
 /* Modal System */

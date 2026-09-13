@@ -90,15 +90,17 @@ export function renderPortalHero() {
              ============================================================ -->
         <style>
           #portalWallCard {
-            transform: skewY(-13.5deg) scale(0.95);
-            -webkit-transform: skewY(-13.5deg) scale(0.95);
+            transform: perspective(850px) translateZ(40px) rotateY(26deg) rotateX(-3.5deg) skewY(-13.5deg) scale(0.95);
+            -webkit-transform: perspective(850px) translateZ(40px) rotateY(26deg) rotateX(-3.5deg) skewY(-13.5deg) scale(0.95);
             transform-origin: left center;
             -webkit-transform-origin: left center;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
           }
           @media (min-width: 768px) {
             #portalWallCard {
-              transform: skewY(-9.8deg) scale(1.12);
-              -webkit-transform: skewY(-9.8deg) scale(1.12);
+              transform: perspective(1000px) translateZ(60px) rotateY(18deg) rotateX(-3deg) skewY(-9.8deg) scale(1.15);
+              -webkit-transform: perspective(1000px) translateZ(60px) rotateY(18deg) rotateX(-3deg) skewY(-9.8deg) scale(1.15);
             }
           }
         </style>
@@ -106,7 +108,7 @@ export function renderPortalHero() {
         <div 
           id="portalWallLayer" 
           class="absolute inset-x-0 bottom-0 top-[66.5%] sm:top-[62%] md:top-[53.5%] z-50 flex items-start justify-start pl-[16vw] pr-4 sm:pl-[16vw] md:pl-[9.4vw] md:pr-6 pointer-events-auto"
-          style="opacity: 0; visibility: hidden;"
+          style="perspective: 1000px; -webkit-perspective: 1000px; perspective-origin: 30% 85%; -webkit-perspective-origin: 30% 85%; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; opacity: 0; visibility: hidden;"
         >
           <div 
             id="portalWallCard" 
@@ -139,9 +141,9 @@ export function renderPortalHero() {
               class="flex flex-row items-center gap-2 sm:gap-4 mt-3 sm:mt-6 relative z-50 pointer-events-auto"
             >
               <a 
-                href="#homeOfferSection" 
+                href="/get-my-offer" 
                 id="portalCtaBtn"
-                data-nav="#homeOfferSection"
+                data-nav="/get-my-offer"
                 data-analytics-cta="get-my-offer" 
                 data-location="portal_hero_wall" 
                 class="btn-copper py-2.5 sm:py-3.5 px-4 sm:px-8 text-xs sm:text-base font-bold shadow-lifted inline-flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer whitespace-nowrap pointer-events-auto relative z-50"
@@ -473,7 +475,12 @@ export function initPortalHero() {
       // Linear interpolation smoothing (0.22)
       const diff = targetProgress - currentProgress;
       if (Math.abs(diff) > 0.0001) {
-        currentProgress += diff * LERP_SMOOTHING;
+        // Prevent video stroboscopic fast-forward if a large programmatic jump occurs
+        if (Math.abs(diff) > 0.15) {
+          currentProgress = targetProgress;
+        } else {
+          currentProgress += diff * LERP_SMOOTHING;
+        }
       } else {
         currentProgress = targetProgress;
       }
@@ -608,31 +615,18 @@ export function initPortalHero() {
     const handleCta = (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const target = document.getElementById('homeOfferSection');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => {
-          const addr = document.getElementById('homeOfferForm_address');
-          if (addr) addr.focus();
-        }, 500);
-      } else {
-        window.location.href = '/get-my-offer';
-      }
+      window.dispatchEvent(new CustomEvent('app:navigate', { detail: { route: '/get-my-offer' } }));
     };
     portalCtaBtn.onclick = handleCta;
     portalCtaBtn.addEventListener('click', handleCta);
-    portalCtaBtn.addEventListener('touchend', handleCta);
   }
 
   const portalPhoneBtn = document.getElementById('portalPhoneBtn');
   if (portalPhoneBtn) {
-    const handlePhone = (e) => {
+    // Retain clean native anchor protocol handling for tel:5024903131
+    portalPhoneBtn.onclick = (e) => {
       e.stopPropagation();
-      window.location.href = 'tel:5024903131';
     };
-    portalPhoneBtn.onclick = handlePhone;
-    portalPhoneBtn.addEventListener('click', handlePhone);
-    portalPhoneBtn.addEventListener('touchend', handlePhone);
   }
 
   startRenderLoop();
