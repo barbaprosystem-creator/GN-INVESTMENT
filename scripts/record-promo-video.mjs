@@ -1,27 +1,28 @@
 /**
- * G&N Investment — Automated 60fps Promo Video Capture Script
- * Part of the 'website-promo-video' skill toolkit.
- *
- * Requirements:
- *   npm install -D playwright
+ * G&N Investment — Complete Full-Page Cinematic Showcase Recording Script
+ * Records the entire scrollytelling experience from the exterior house
+ * through the living room 3D wall, the metallic logo reveal, the arched
+ * process walkthrough, and into the homepage body — with NO button interruptions.
  *
  * Usage:
  *   node scripts/record-promo-video.mjs
  */
 
-import { chromium } from 'playwright';
+import { chromium } from 'playwright-core';
 import fs from 'fs';
 import path from 'path';
 
-async function runShowcaseRecording() {
+async function runFullShowcaseRecording() {
   const outputDir = path.resolve('./recordings');
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  console.log('🚀 Iniciando navegador en modo Retina (deviceScaleFactor: 2)...');
+  const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+  console.log('🚀 Iniciando Chrome en modo Retina 2x (1920x1080 60fps)...');
   const browser = await chromium.launch({
-    headless: false, // Visible so you can watch the choreography
+    executablePath: fs.existsSync(chromePath) ? chromePath : undefined,
+    headless: false, // Visible para apreciar la coreografía en tiempo real
     args: ['--force-device-scale-factor=2', '--disable-infobars', '--no-sandbox']
   });
 
@@ -39,50 +40,87 @@ async function runShowcaseRecording() {
   console.log('🌐 Navegando a http://localhost:5173/ ...');
   await page.goto('http://localhost:5173/', { waitUntil: 'networkidle' });
 
-  // Cubic bezier easing for human-like momentum scroll
-  async function smoothScroll(distance, durationMs) {
+  // Mathematical smooth scroll targeting exact GSAP progress
+  async function smoothScrollToHeroProgress(targetProgress, durationMs) {
+    const totalHeroScrollable = await page.evaluate(() => {
+      const sec = document.getElementById('portalHeroSection');
+      return sec ? sec.getBoundingClientRect().height - window.innerHeight : 5000;
+    });
+    const targetY = totalHeroScrollable * targetProgress;
+    const currentY = await page.evaluate(() => window.scrollY);
+    const distance = targetY - currentY;
     const steps = 75;
-    const stepDist = distance / steps;
     const stepDelay = durationMs / steps;
-    for (let i = 0; i < steps; i++) {
+
+    for (let i = 1; i <= steps; i++) {
       const t = i / steps;
+      // Smooth easeInOutCubic for fluid camera motion
       const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      await page.mouse.wheel(0, stepDist * (ease * 1.4));
+      const nextY = currentY + distance * ease;
+      await page.evaluate((y) => window.scrollTo(0, y), nextY);
       await page.waitForTimeout(stepDelay);
     }
   }
 
-  // Helper for natural smooth cursor glide
-  async function smoothMouseMove(targetX, targetY, steps = 30) {
-    await page.mouse.move(targetX, targetY, { steps });
+  // Smooth scroll past the hero into the rest of the homepage
+  async function smoothScrollPastHero(additionalPixels, durationMs) {
+    const currentY = await page.evaluate(() => window.scrollY);
+    const targetY = currentY + additionalPixels;
+    const steps = 60;
+    const stepDelay = durationMs / steps;
+
+    for (let i = 1; i <= steps; i++) {
+      const t = i / steps;
+      const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      const nextY = currentY + (targetY - currentY) * ease;
+      await page.evaluate((y) => window.scrollTo(0, y), nextY);
+      await page.waitForTimeout(stepDelay);
+    }
   }
 
-  console.log('🎬 Acto 1: Vista exterior Kentucky house (3.0s)...');
+  console.log('🎬 [00s-03s] Acto 1: Vista exterior Kentucky house...');
+  await page.waitForTimeout(2500);
+
+  console.log('🎬 [03s-08s] Entrada cinemática hacia el living y pared de yeso 3D...');
+  await smoothScrollToHeroProgress(0.30, 4800);
+  console.log('⏸️ Pausa en la pared de yeso 3D (SELL YOUR HOUSE AS-IS)...');
+  await page.waitForTimeout(2500);
+
+  console.log('🎬 [08s-14s] Reanudar scroll hacia la revelación del Logo Metálico 3D...');
+  await smoothScrollToHeroProgress(0.53, 5000);
+  console.log('⏸️ Pausa en el brillo del Logo 3D y destello de luz...');
+  await page.waitForTimeout(2200);
+
+  console.log('🎬 [14s-20s] Avanzando por los arcos hacia el muro de proceso (Acto 3)...');
+  await smoothScrollToHeroProgress(0.89, 5200);
+  console.log('⏸️ Pausa en la pared de proceso de 4 pasos...');
+  await page.waitForTimeout(2200);
+
+  console.log('🎬 [20s-26s] Desanclaje diurno hacia el cuerpo de la web (Trust Strip + Oferta)...');
+  await smoothScrollToHeroProgress(1.00, 3500);
+  await page.waitForTimeout(1000);
+
+  console.log('🎬 [26s-30s] Desplazamiento final por el formulario, tabla y contenido...');
+  await smoothScrollPastHero(1200, 4000);
+  console.log('⏸️ Pausa final para apreciar el diseño completo...');
   await page.waitForTimeout(3000);
 
-  console.log('🎬 Acto 2: Recorrido hacia el living con pared de yeso 3D...');
-  await smoothScroll(2150, 4200);
-  await page.waitForTimeout(2000);
-
-  console.log('🎬 Acto 3: Mover cursor hacia "Get My Offer" con zoom e interacción...');
-  const ctaBtn = page.locator('#portalCtaBtn');
-  const box = await ctaBtn.boundingBox();
-  if (box) {
-    await smoothMouseMove(box.x + box.width / 2, box.y + box.height / 2, 35);
-    await page.waitForTimeout(800);
-    await ctaBtn.click();
-    console.log('👆 Clic realizado en "Get My Offer"');
-  }
-
-  console.log('🎬 Acto 4: Demostración del formulario dedicado de valoración (3.5s)...');
-  await page.waitForTimeout(3500);
+  // Get video object before closing context
+  const videoObj = page.video();
+  const videoPath = videoObj ? await videoObj.path() : null;
 
   await context.close();
   await browser.close();
 
-  console.log(`\n✅ Grabación 60fps guardada con éxito en:\n   ${outputDir}\n`);
+  if (videoPath && fs.existsSync(videoPath)) {
+    const finalWebm = path.join(outputDir, 'gn-investment-full-showcase.webm');
+    fs.copyFileSync(videoPath, finalWebm);
+    console.log(`\n🎉 ¡VIDEO COMPLETO GRABADO CON ÉXITO!\n   Archivo: ${finalWebm}\n`);
+  } else {
+    console.log(`\n✅ Grabación finalizada en ${outputDir}\n`);
+  }
 }
 
-runShowcaseRecording().catch((err) => {
+runFullShowcaseRecording().catch((err) => {
   console.error('Error durante la grabación:', err);
 });

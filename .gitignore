@@ -33,3 +33,5 @@ dist-ssr/
 # Agents and temp tools
 .agents/
 skills-lock.json
+recordings/
+
