@@ -9,7 +9,7 @@ export default function DreemHeroSection({
   logoText = "ONAR.",
   giantHeadline = "DREEM STUDIO",
   houseImageUrl = "/images/house-cutout.png", // or a high-res wood/glass house PNG
-  phoneNumber = "+1 (502) 490-3131",
+  phoneNumber = "+1 (502) 384-3357",
   onCtaClick = () => {},
 }) {
   return (

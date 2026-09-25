@@ -153,13 +153,13 @@ export function renderPortalHero() {
               </a>
 
               <a 
-                href="tel:5024903131" 
+                href="tel:5023843357" 
                 id="portalPhoneBtn"
                 data-location="portal_hero_wall" 
                 class="btn-secondary bg-white/20 hover:bg-white/35 text-white border-white/40 py-2.5 sm:py-3.5 px-3.5 sm:px-6 text-xs sm:text-sm font-semibold inline-flex items-center justify-center gap-1.5 sm:gap-2 backdrop-blur-md cursor-pointer whitespace-nowrap pointer-events-auto relative z-50"
               >
                 <span class="material-symbols-outlined text-[15px] sm:text-[18px] text-soft-copper">call</span>
-                <span>Call (502) 490-3131</span>
+                <span>Call (502) 384-3357</span>
               </a>
             </div>
 
@@ -278,6 +278,7 @@ export function initPortalHero() {
   let displayedKey = null;
   let needsRedraw = true;
   let rafId = null;
+  let masterTimeline = null;
 
   // Cache helper
   function getFrameUrl(seq, frameIndex, orientation) {
@@ -402,10 +403,12 @@ export function initPortalHero() {
   }
   preloadFrame('walkthrough', TOTAL_FRAMES_WALKTHROUGH, activeOrientation, false);
 
-  // Logo sequence: Frame 1 & 120
-  preloadFrame('logo', 1, activeOrientation, false);
-  preloadFrame('logo', 2, activeOrientation, false);
-  preloadFrame('logo', TOTAL_FRAMES_LOGO, activeOrientation, false);
+  // Logo sequence: preload on mobile only
+  if (!isDesktop) {
+    preloadFrame('logo', 1, activeOrientation, false);
+    preloadFrame('logo', 2, activeOrientation, false);
+    preloadFrame('logo', TOTAL_FRAMES_LOGO, activeOrientation, false);
+  }
 
   // Process sequence: Frame 1 & 120
   preloadFrame('process', 1, activeOrientation, false);
@@ -418,28 +421,51 @@ export function initPortalHero() {
   let preloadedPhase3 = false;
 
   function handleProgressivePreload(progress) {
-    if (progress > 0.08 && !preloadedPhase1) {
-      preloadedPhase1 = true;
-      for (let f = 25; f <= TOTAL_FRAMES_WALKTHROUGH; f += 2) {
-        preloadFrame('walkthrough', f, activeOrientation, false);
+    if (isDesktop) {
+      // Desktop: 2 chapters (walkthrough -> process)
+      if (progress > 0.06 && !preloadedPhase1) {
+        preloadedPhase1 = true;
+        for (let f = 25; f <= TOTAL_FRAMES_WALKTHROUGH; f += 2) {
+          preloadFrame('walkthrough', f, activeOrientation, false);
+        }
+        for (let f = 3; f <= 35; f++) {
+          preloadFrame('process', f, activeOrientation, false);
+        }
       }
-      for (let f = 3; f <= 35; f++) {
-        preloadFrame('logo', f, activeOrientation, false);
+      if (progress > 0.30 && !preloadedPhase2) {
+        preloadedPhase2 = true;
+        for (let f = 26; f <= TOTAL_FRAMES_WALKTHROUGH; f += 2) {
+          preloadFrame('walkthrough', f, activeOrientation, false);
+        }
+        for (let f = 36; f <= TOTAL_FRAMES_PROCESS; f++) {
+          preloadFrame('process', f, activeOrientation, false);
+        }
       }
-    }
-    if (progress > 0.25 && !preloadedPhase2) {
-      preloadedPhase2 = true;
-      for (let f = 36; f <= TOTAL_FRAMES_LOGO; f++) {
-        preloadFrame('logo', f, activeOrientation, false);
+    } else {
+      // Mobile: 3 chapters (walkthrough -> logo -> process)
+      if (progress > 0.08 && !preloadedPhase1) {
+        preloadedPhase1 = true;
+        for (let f = 25; f <= TOTAL_FRAMES_WALKTHROUGH; f += 2) {
+          preloadFrame('walkthrough', f, activeOrientation, false);
+        }
+        for (let f = 3; f <= 35; f++) {
+          preloadFrame('logo', f, activeOrientation, false);
+        }
       }
-      for (let f = 3; f <= 35; f++) {
-        preloadFrame('process', f, activeOrientation, false);
+      if (progress > 0.25 && !preloadedPhase2) {
+        preloadedPhase2 = true;
+        for (let f = 36; f <= TOTAL_FRAMES_LOGO; f++) {
+          preloadFrame('logo', f, activeOrientation, false);
+        }
+        for (let f = 3; f <= 35; f++) {
+          preloadFrame('process', f, activeOrientation, false);
+        }
       }
-    }
-    if (progress > 0.50 && !preloadedPhase3) {
-      preloadedPhase3 = true;
-      for (let f = 36; f <= TOTAL_FRAMES_PROCESS; f++) {
-        preloadFrame('process', f, activeOrientation, false);
+      if (progress > 0.50 && !preloadedPhase3) {
+        preloadedPhase3 = true;
+        for (let f = 36; f <= TOTAL_FRAMES_PROCESS; f++) {
+          preloadFrame('process', f, activeOrientation, false);
+        }
       }
     }
   }
@@ -456,9 +482,12 @@ export function initPortalHero() {
       preloadedPhase2 = false;
       preloadedPhase3 = false;
       preloadFrame('walkthrough', 1, activeOrientation, true);
-      preloadFrame('logo', 1, activeOrientation, false);
+      if (!isDesktop) {
+        preloadFrame('logo', 1, activeOrientation, false);
+      }
       preloadFrame('process', 1, activeOrientation, false);
       needsRedraw = true;
+      buildMasterTimeline();
     }
   }
 
@@ -486,58 +515,88 @@ export function initPortalHero() {
       }
 
       // ============================================================
-      // TRIPLE CHAPTER FRAME MAPPING (800vh runway)
-      //
-      // Chapter 1: House Entrance Walkthrough (progress 0.00 -> 0.36)
-      // - 0.00 to 0.02: Hold frame 1 (exterior Kentucky home)
-      // - 0.02 to 0.28: Scrub frames 1 -> 120 (enter doorway -> living room)
-      // - 0.28 to 0.35: Hold frame 120 (living room wall with CTA card)
-      // - 0.35 to 0.37: Transition window 1
-      //
-      // Chapter 2: 3D Metallic Logo Reveal (progress 0.37 -> 0.62)
-      // - 0.37 to 0.39: Transition into logo sequence (frame 1, pure white)
-      // - 0.39 to 0.58: Scrub logo frames 1 -> 120 (lines -> 3D metallic shine -> flare)
-      // - 0.58 to 0.61: Hold frame 120 (flare in pure white)
-      //
-      // Chapter 3: Process Walkthrough ("How a Direct Sale Works") (progress 0.61 -> 0.94)
-      // - 0.61 to 0.64: Transition from white flare into arched hallway (frame 1)
-      // - 0.64 to 0.88: Scrub process frames 1 -> 120 (advance through arches into room wall)
-      // - 0.88 to 0.94: Hold frame 120 (process wall with 4 steps & CTA prompt)
-      //
-      // Outro: Unpin into page body (progress 0.94 -> 1.00)
+      // DUAL FRAME MAPPING
+      // Desktop: 2-Act Scrollytelling (Walkthrough -> Process)
+      // Mobile: 3-Act Scrollytelling (Walkthrough -> Logo -> Process)
       // ============================================================
       let activeSeq = 'walkthrough';
       let targetFrame = 1;
 
-      if (currentProgress < 0.37) {
-        activeSeq = 'walkthrough';
-        if (currentProgress <= 0.02) {
-          targetFrame = 1;
-        } else if (currentProgress >= 0.28) {
-          targetFrame = TOTAL_FRAMES_WALKTHROUGH;
+      if (isDesktop) {
+        // ----------------------------------------------------------
+        // DESKTOP: 2 Cinematic Chapters
+        // Chapter 1: House Entrance Walkthrough (0.00 -> 0.48)
+        // - 0.00 to 0.03: Hold frame 1
+        // - 0.03 to 0.38: Scrub frames 1 -> 120 (entrance -> living room wall)
+        // - 0.38 to 0.46: Hold frame 120 (living room wall with CTA card)
+        // - 0.46 to 0.49: Light Bloom Transition to Chapter 2
+        //
+        // Chapter 2: Process Walkthrough ("How a Direct Sale Works") (0.49 -> 0.94)
+        // - 0.49 to 0.52: Arched hallway entrance (frame 1)
+        // - 0.52 to 0.86: Scrub frames 1 -> 120 (advance through arches into process wall)
+        // - 0.86 to 0.94: Hold frame 120 (process wall with 4 steps)
+        //
+        // Outro: Unpin into page body (0.94 -> 1.00)
+        // ----------------------------------------------------------
+        if (currentProgress < 0.48) {
+          activeSeq = 'walkthrough';
+          if (currentProgress <= 0.03) {
+            targetFrame = 1;
+          } else if (currentProgress >= 0.38) {
+            targetFrame = TOTAL_FRAMES_WALKTHROUGH;
+          } else {
+            const norm = (currentProgress - 0.03) / (0.38 - 0.03);
+            targetFrame = Math.min(TOTAL_FRAMES_WALKTHROUGH, Math.max(1, Math.round(norm * (TOTAL_FRAMES_WALKTHROUGH - 1)) + 1));
+          }
         } else {
-          const norm = (currentProgress - 0.02) / (0.28 - 0.02);
-          targetFrame = Math.min(TOTAL_FRAMES_WALKTHROUGH, Math.max(1, Math.round(norm * (TOTAL_FRAMES_WALKTHROUGH - 1)) + 1));
-        }
-      } else if (currentProgress < 0.62) {
-        activeSeq = 'logo';
-        if (currentProgress <= 0.39) {
-          targetFrame = 1;
-        } else if (currentProgress >= 0.58) {
-          targetFrame = TOTAL_FRAMES_LOGO;
-        } else {
-          const norm = (currentProgress - 0.39) / (0.58 - 0.39);
-          targetFrame = Math.min(TOTAL_FRAMES_LOGO, Math.max(1, Math.round(norm * (TOTAL_FRAMES_LOGO - 1)) + 1));
+          activeSeq = 'process';
+          if (currentProgress <= 0.52) {
+            targetFrame = 1;
+          } else if (currentProgress >= 0.86) {
+            targetFrame = TOTAL_FRAMES_PROCESS;
+          } else {
+            const norm = (currentProgress - 0.52) / (0.86 - 0.52);
+            targetFrame = Math.min(TOTAL_FRAMES_PROCESS, Math.max(1, Math.round(norm * (TOTAL_FRAMES_PROCESS - 1)) + 1));
+          }
         }
       } else {
-        activeSeq = 'process';
-        if (currentProgress <= 0.64) {
-          targetFrame = 1;
-        } else if (currentProgress >= 0.88) {
-          targetFrame = TOTAL_FRAMES_PROCESS;
+        // ----------------------------------------------------------
+        // MOBILE: 3 Cinematic Chapters
+        // Chapter 1: House Walkthrough (0.00 -> 0.36)
+        // Chapter 2: 3D Metallic Logo Reveal (0.37 -> 0.62)
+        // Chapter 3: Process Walkthrough (0.61 -> 0.94)
+        // Outro: Unpin into page body (0.94 -> 1.00)
+        // ----------------------------------------------------------
+        if (currentProgress < 0.37) {
+          activeSeq = 'walkthrough';
+          if (currentProgress <= 0.02) {
+            targetFrame = 1;
+          } else if (currentProgress >= 0.28) {
+            targetFrame = TOTAL_FRAMES_WALKTHROUGH;
+          } else {
+            const norm = (currentProgress - 0.02) / (0.28 - 0.02);
+            targetFrame = Math.min(TOTAL_FRAMES_WALKTHROUGH, Math.max(1, Math.round(norm * (TOTAL_FRAMES_WALKTHROUGH - 1)) + 1));
+          }
+        } else if (currentProgress < 0.62) {
+          activeSeq = 'logo';
+          if (currentProgress <= 0.39) {
+            targetFrame = 1;
+          } else if (currentProgress >= 0.58) {
+            targetFrame = TOTAL_FRAMES_LOGO;
+          } else {
+            const norm = (currentProgress - 0.39) / (0.58 - 0.39);
+            targetFrame = Math.min(TOTAL_FRAMES_LOGO, Math.max(1, Math.round(norm * (TOTAL_FRAMES_LOGO - 1)) + 1));
+          }
         } else {
-          const norm = (currentProgress - 0.64) / (0.88 - 0.64);
-          targetFrame = Math.min(TOTAL_FRAMES_PROCESS, Math.max(1, Math.round(norm * (TOTAL_FRAMES_PROCESS - 1)) + 1));
+          activeSeq = 'process';
+          if (currentProgress <= 0.64) {
+            targetFrame = 1;
+          } else if (currentProgress >= 0.88) {
+            targetFrame = TOTAL_FRAMES_PROCESS;
+          } else {
+            const norm = (currentProgress - 0.64) / (0.88 - 0.64);
+            targetFrame = Math.min(TOTAL_FRAMES_PROCESS, Math.max(1, Math.round(norm * (TOTAL_FRAMES_PROCESS - 1)) + 1));
+          }
         }
       }
 
@@ -582,12 +641,22 @@ export function initPortalHero() {
   // Wall interactivity helper: ensures pointer-events are enabled whenever the card is visible
   function updateWallInteractivity(progress) {
     if (!wallLayer) return;
-    if (progress >= 0.24 && progress <= 0.42) {
-      wallLayer.style.visibility = 'visible';
-      wallLayer.style.pointerEvents = 'auto';
-    } else if (progress < 0.22 || progress > 0.44) {
-      wallLayer.style.visibility = 'hidden';
-      wallLayer.style.pointerEvents = 'none';
+    if (isDesktop) {
+      if (progress >= 0.35 && progress <= 0.48) {
+        wallLayer.style.visibility = 'visible';
+        wallLayer.style.pointerEvents = 'auto';
+      } else if (progress < 0.33 || progress > 0.50) {
+        wallLayer.style.visibility = 'hidden';
+        wallLayer.style.pointerEvents = 'none';
+      }
+    } else {
+      if (progress >= 0.24 && progress <= 0.42) {
+        wallLayer.style.visibility = 'visible';
+        wallLayer.style.pointerEvents = 'auto';
+      } else if (progress < 0.22 || progress > 0.44) {
+        wallLayer.style.visibility = 'hidden';
+        wallLayer.style.pointerEvents = 'none';
+      }
     }
   }
 
@@ -623,7 +692,7 @@ export function initPortalHero() {
 
   const portalPhoneBtn = document.getElementById('portalPhoneBtn');
   if (portalPhoneBtn) {
-    // Retain clean native anchor protocol handling for tel:5024903131
+    // Retain clean native anchor protocol handling for tel:5023843357
     portalPhoneBtn.onclick = (e) => {
       e.stopPropagation();
     };
@@ -632,185 +701,286 @@ export function initPortalHero() {
   startRenderLoop();
 
   // ============================================================
-  // MASTER GSAP SCROLLTRIGGER TIMELINE
-  // Pins the viewport and choreographs:
-  // - Act 1 Walkthrough (0.00 to 0.28)
-  // - Milestone 1 Plaster Wall Card (0.28 to 0.35)
-  // - Transition 1 White Bloom (0.35 to 0.39)
-  // - Act 2 3D Logo Reveal (0.39 to 0.58)
-  // - Transition 2 White Bloom (0.58 to 0.64)
-  // - Act 3 Process Walkthrough (0.64 to 0.88)
-  // - Milestone 3 Process Wall & CTA prompt (0.88 to 0.94)
-  // - Unpin into homepage body (0.94 to 1.00)
+  // MASTER GSAP SCROLLTRIGGER TIMELINE BUILDER
+  // Adapts timeline choreography to Desktop (2 acts) vs Mobile (3 acts)
   // ============================================================
-  ScrollTrigger.getAll().forEach((st) => {
-    if (st.trigger === section) st.kill();
-  });
+  function buildMasterTimeline() {
+    if (masterTimeline) {
+      masterTimeline.kill();
+    }
+    ScrollTrigger.getAll().forEach((st) => {
+      if (st.trigger === section) st.kill();
+    });
 
-  const masterTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      start: 'top top',
-      end: 'bottom bottom',
-      pin: pinContainer,
-      pinSpacing: false,
-      anticipatePin: 1,
-      scrub: 0.3,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        targetProgress = self.progress;
-        handleProgressivePreload(self.progress);
-        updateWallInteractivity(self.progress);
-        updateHeaderVisibility(self.progress, section.getBoundingClientRect().bottom);
-      },
-      onLeave: () => {
-        if (header) {
-          header.style.opacity = '1';
-          header.style.pointerEvents = 'auto';
-          header.style.transform = 'translateY(0)';
-        }
-      },
-      onEnterBack: () => {
-        if (header) {
-          header.style.opacity = '0';
-          header.style.pointerEvents = 'none';
-          header.style.transform = 'translateY(-10px)';
+    masterTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        pin: pinContainer,
+        pinSpacing: false,
+        anticipatePin: 1,
+        scrub: 0.3,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          targetProgress = self.progress;
+          handleProgressivePreload(self.progress);
+          updateWallInteractivity(self.progress);
+          updateHeaderVisibility(self.progress, section.getBoundingClientRect().bottom);
+        },
+        onLeave: () => {
+          if (header) {
+            header.style.opacity = '1';
+            header.style.pointerEvents = 'auto';
+            header.style.transform = 'translateY(0)';
+          }
+        },
+        onEnterBack: () => {
+          if (header) {
+            header.style.opacity = '0';
+            header.style.pointerEvents = 'none';
+            header.style.transform = 'translateY(-10px)';
+          }
         }
       }
+    });
+
+    if (isDesktop) {
+      // --------------------------------------------------------
+      // DESKTOP TIMELINE (2 Acts: Walkthrough -> Process)
+      // --------------------------------------------------------
+      // 1. Initial Prompt fades out
+      masterTimeline.to(
+        scrollPrompt,
+        { opacity: 0, ease: 'power1.out', duration: 0.02 },
+        0.02
+      );
+
+      // 2. Wall Card fades in on living room wall (0.36 to 0.38)
+      masterTimeline.fromTo(
+        wallLayer,
+        { opacity: 0, autoAlpha: 0 },
+        { opacity: 1, autoAlpha: 1, ease: 'power2.out', duration: 0.03 },
+        0.36
+      );
+
+      // Second scroll prompt hints user to continue scrolling
+      if (secondScrollPrompt) {
+        masterTimeline.fromTo(
+          secondScrollPrompt,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power1.out', duration: 0.02 },
+          0.38
+        );
+        masterTimeline.to(
+          secondScrollPrompt,
+          { opacity: 0, ease: 'power1.out', duration: 0.02 },
+          0.45
+        );
+      }
+
+      // 3. Wall Layer fades out (0.46 to 0.49)
+      masterTimeline.to(
+        wallLayer,
+        { opacity: 0, autoAlpha: 0, ease: 'power2.in', duration: 0.03 },
+        0.46
+      );
+
+      // 4. White light bloom transition directly between Walkthrough and Process Walkthrough (0.46 to 0.52)
+      if (lightTransition) {
+        masterTimeline.fromTo(
+          lightTransition,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power1.inOut', duration: 0.03 },
+          0.46
+        );
+        masterTimeline.to(
+          lightTransition,
+          { opacity: 0, ease: 'power1.inOut', duration: 0.03 },
+          0.49
+        );
+      }
+
+      // 5. Process Wall Hold prompt (0.86 to 0.93)
+      if (processPrompt) {
+        masterTimeline.fromTo(
+          processPrompt,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power1.out', duration: 0.03 },
+          0.86
+        );
+        masterTimeline.to(
+          processPrompt,
+          { opacity: 0, ease: 'power1.in', duration: 0.02 },
+          0.925
+        );
+      }
+
+      // 6. Fluid Exit Transition: Daylight wash & bottom dissolve into page body (0.92 to 0.985)
+      if (bottomDissolve) {
+        masterTimeline.fromTo(
+          bottomDissolve,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power2.inOut', duration: 0.06 },
+          0.92
+        );
+      }
+      if (exitVeil) {
+        masterTimeline.fromTo(
+          exitVeil,
+          { opacity: 0 },
+          { opacity: 0.85, ease: 'power2.inOut', duration: 0.055 },
+          0.93
+        );
+      }
+      if (canvas) {
+        masterTimeline.fromTo(
+          canvas,
+          { scale: 1, y: 0 },
+          { scale: 1.03, y: -16, ease: 'power1.out', duration: 0.065 },
+          0.92
+        );
+      }
+
+      // 7. Final cushion
+      masterTimeline.to({}, { duration: 0.015 }, 0.985);
+
+    } else {
+      // --------------------------------------------------------
+      // MOBILE TIMELINE (3 Acts: Walkthrough -> Logo -> Process)
+      // --------------------------------------------------------
+      // 1. Initial Prompt fades out
+      masterTimeline.to(
+        scrollPrompt,
+        { opacity: 0, ease: 'power1.out', duration: 0.02 },
+        0.02
+      );
+
+      // 2. Wall Card fades in on living room wall (0.27 to 0.29)
+      masterTimeline.fromTo(
+        wallLayer,
+        { opacity: 0, autoAlpha: 0 },
+        { opacity: 1, autoAlpha: 1, ease: 'power2.out', duration: 0.03 },
+        0.27
+      );
+
+      if (secondScrollPrompt) {
+        masterTimeline.fromTo(
+          secondScrollPrompt,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power1.out', duration: 0.02 },
+          0.29
+        );
+      }
+
+      // 3. Wall Layer and prompt fade out (0.35 to 0.37)
+      masterTimeline.to(
+        wallLayer,
+        { opacity: 0, autoAlpha: 0, ease: 'power2.in', duration: 0.03 },
+        0.36
+      );
+      if (secondScrollPrompt) {
+        masterTimeline.to(
+          secondScrollPrompt,
+          { opacity: 0, ease: 'power1.out', duration: 0.02 },
+          0.35
+        );
+      }
+
+      // 4. White light bloom transition 1: Walkthrough to 3D Logo Reveal (0.35 to 0.39)
+      if (lightTransition) {
+        masterTimeline.fromTo(
+          lightTransition,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power1.inOut', duration: 0.02 },
+          0.35
+        );
+        masterTimeline.to(
+          lightTransition,
+          { opacity: 0, ease: 'power1.inOut', duration: 0.02 },
+          0.37
+        );
+      }
+
+      // Vignette fade out during 3D logo
+      if (vignette) {
+        masterTimeline.to(
+          vignette,
+          { opacity: 0, ease: 'power1.inOut', duration: 0.03 },
+          0.36
+        );
+      }
+
+      // 5. White light bloom transition 2: 3D Logo Flare into Process Walkthrough (0.58 to 0.64)
+      if (lightTransition) {
+        masterTimeline.fromTo(
+          lightTransition,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power1.inOut', duration: 0.025 },
+          0.58
+        );
+        masterTimeline.to(
+          lightTransition,
+          { opacity: 0, ease: 'power1.inOut', duration: 0.035 },
+          0.61
+        );
+      }
+
+      if (vignette) {
+        masterTimeline.to(
+          vignette,
+          { opacity: 1, ease: 'power1.inOut', duration: 0.03 },
+          0.62
+        );
+      }
+
+      // 6. Process Wall Hold prompt (0.88 to 0.93)
+      if (processPrompt) {
+        masterTimeline.fromTo(
+          processPrompt,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power1.out', duration: 0.03 },
+          0.88
+        );
+        masterTimeline.to(
+          processPrompt,
+          { opacity: 0, ease: 'power1.in', duration: 0.02 },
+          0.925
+        );
+      }
+
+      // 7. Fluid Exit Transition
+      if (bottomDissolve) {
+        masterTimeline.fromTo(
+          bottomDissolve,
+          { opacity: 0 },
+          { opacity: 1, ease: 'power2.inOut', duration: 0.06 },
+          0.92
+        );
+      }
+      if (exitVeil) {
+        masterTimeline.fromTo(
+          exitVeil,
+          { opacity: 0 },
+          { opacity: 0.85, ease: 'power2.inOut', duration: 0.055 },
+          0.93
+        );
+      }
+      if (canvas) {
+        masterTimeline.fromTo(
+          canvas,
+          { scale: 1, y: 0 },
+          { scale: 1.03, y: -16, ease: 'power1.out', duration: 0.065 },
+          0.92
+        );
+      }
+
+      // 8. Final cushion
+      masterTimeline.to({}, { duration: 0.015 }, 0.985);
     }
-  });
-
-  // 1. Initial Prompt fades out on initial scroll
-  masterTimeline.to(
-    scrollPrompt,
-    { opacity: 0, ease: 'power1.out', duration: 0.02 },
-    0.02
-  );
-
-  // 2. Milestone 1: Wall interactive card fades in as walkthrough reaches the living room wall (0.27 to 0.29)
-  masterTimeline.fromTo(
-    wallLayer,
-    { opacity: 0, autoAlpha: 0 },
-    { opacity: 1, autoAlpha: 1, ease: 'power2.out', duration: 0.03 },
-    0.27
-  );
-
-  // Second scroll prompt hints user to continue scrolling
-  if (secondScrollPrompt) {
-    masterTimeline.fromTo(
-      secondScrollPrompt,
-      { opacity: 0 },
-      { opacity: 1, ease: 'power1.out', duration: 0.02 },
-      0.29
-    );
   }
 
-  // 3. Resuming Scroll ("al volver a hacer scroll"):
-  // Wall Layer and Second Scroll Prompt fade out (0.35 to 0.37)
-  masterTimeline.to(
-    wallLayer,
-    { opacity: 0, autoAlpha: 0, ease: 'power2.in', duration: 0.03 },
-    0.36
-  );
-  if (secondScrollPrompt) {
-    masterTimeline.to(
-      secondScrollPrompt,
-      { opacity: 0, ease: 'power1.out', duration: 0.02 },
-      0.35
-    );
-  }
-
-  // 4. White light bloom transition 1: Walkthrough to 3D Logo Reveal (0.35 to 0.39)
-  if (lightTransition) {
-    masterTimeline.fromTo(
-      lightTransition,
-      { opacity: 0 },
-      { opacity: 1, ease: 'power1.inOut', duration: 0.02 },
-      0.35
-    );
-    masterTimeline.to(
-      lightTransition,
-      { opacity: 0, ease: 'power1.inOut', duration: 0.02 },
-      0.37
-    );
-  }
-
-  // Vignette management: fade out during pristine studio 3D logo
-  if (vignette) {
-    masterTimeline.to(
-      vignette,
-      { opacity: 0, ease: 'power1.inOut', duration: 0.03 },
-      0.36
-    );
-  }
-
-  // 5. White light bloom transition 2: 3D Logo Flare into Process Walkthrough (0.58 to 0.64)
-  if (lightTransition) {
-    masterTimeline.fromTo(
-      lightTransition,
-      { opacity: 0 },
-      { opacity: 1, ease: 'power1.inOut', duration: 0.025 },
-      0.58
-    );
-    masterTimeline.to(
-      lightTransition,
-      { opacity: 0, ease: 'power1.inOut', duration: 0.035 },
-      0.61
-    );
-  }
-
-  // Vignette restores subtly during the house process walkthrough
-  if (vignette) {
-    masterTimeline.to(
-      vignette,
-      { opacity: 1, ease: 'power1.inOut', duration: 0.03 },
-      0.62
-    );
-  }
-
-  // 6. Milestone 3: Process Wall Hold prompt (0.88 to 0.93)
-  if (processPrompt) {
-    masterTimeline.fromTo(
-      processPrompt,
-      { opacity: 0 },
-      { opacity: 1, ease: 'power1.out', duration: 0.03 },
-      0.88
-    );
-    masterTimeline.to(
-      processPrompt,
-      { opacity: 0, ease: 'power1.in', duration: 0.02 },
-      0.925
-    );
-  }
-
-  // 7. Fluid Exit Transition: Ambient daylight & bottom dissolve into the website body (0.92 to 0.985)
-  if (bottomDissolve) {
-    masterTimeline.fromTo(
-      bottomDissolve,
-      { opacity: 0 },
-      { opacity: 1, ease: 'power2.inOut', duration: 0.06 },
-      0.92
-    );
-  }
-  if (exitVeil) {
-    masterTimeline.fromTo(
-      exitVeil,
-      { opacity: 0 },
-      { opacity: 0.85, ease: 'power2.inOut', duration: 0.055 },
-      0.93
-    );
-  }
-  if (canvas) {
-    masterTimeline.fromTo(
-      canvas,
-      { scale: 1, y: 0 },
-      { scale: 1.03, y: -16, ease: 'power1.out', duration: 0.065 },
-      0.92
-    );
-  }
-
-  // 8. Final cushion before releasing pin to the rest of the homepage (0.985 to 1.00)
-  masterTimeline.to({}, { duration: 0.015 }, 0.985);
+  buildMasterTimeline();
 
   // Refresh ScrollTrigger after DOM layout stabilizes
   setTimeout(() => {
@@ -825,7 +995,7 @@ export function initPortalHero() {
   // Cleanup handler
   return () => {
     if (rafId) cancelAnimationFrame(rafId);
-    masterTimeline.kill();
+    if (masterTimeline) masterTimeline.kill();
     ScrollTrigger.getAll().forEach((st) => {
       if (st.trigger === section) st.kill();
     });

@@ -25,12 +25,12 @@ export function renderFooter() {
           <!-- Quick Action Buttons -->
           <div class="flex flex-wrap items-center gap-3">
             <a 
-              href="tel:5024903131" 
+              href="tel:5023843357" 
               data-location="footer"
               class="btn-secondary bg-white/10 hover:bg-white/20 text-white border-white/20 px-5 py-3 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2"
             >
               <span class="material-symbols-outlined text-[18px] text-soft-copper">call</span>
-              <span>Call (502) 490-3131</span>
+              <span>Call (502) 384-3357</span>
             </a>
 
             <a 
@@ -84,7 +84,7 @@ export function renderFooter() {
             <span class="text-xs font-bold uppercase tracking-wider text-soft-copper font-sans">Contact &amp; Hours</span>
             <div class="flex items-center gap-2 text-gray-300">
               <span class="material-symbols-outlined text-[18px] text-soft-copper">phone</span>
-              <a href="tel:5024903131" class="hover:text-white">(502) 490-3131</a>
+              <a href="tel:5023843357" class="hover:text-white">(502) 384-3357</a>
             </div>
             <div class="flex items-center gap-2 text-gray-300">
               <span class="material-symbols-outlined text-[18px] text-soft-copper">location_on</span>

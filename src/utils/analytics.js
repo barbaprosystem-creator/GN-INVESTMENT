@@ -45,7 +45,7 @@ export function initGlobalEventTracking() {
     const telLink = e.target.closest('a[href^="tel:"]');
     if (telLink) {
       trackEvent(ANALYTICS_EVENTS.CLICK_TO_CALL, {
-        phoneNumber: '(502) 490-3131',
+        phoneNumber: '(502) 384-3357',
         location: telLink.getAttribute('data-location') || 'unknown'
       });
       return;

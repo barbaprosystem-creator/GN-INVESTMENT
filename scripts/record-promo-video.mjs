@@ -81,22 +81,17 @@ async function runFullShowcaseRecording() {
   console.log('🎬 [00s-03s] Acto 1: Vista exterior Kentucky house...');
   await page.waitForTimeout(2500);
 
-  console.log('🎬 [03s-08s] Entrada cinemática hacia el living y pared de yeso 3D...');
-  await smoothScrollToHeroProgress(0.30, 4800);
+  console.log('🎬 [03s-09s] Entrada cinemática hacia el living y pared de yeso 3D...');
+  await smoothScrollToHeroProgress(0.42, 5200);
   console.log('⏸️ Pausa en la pared de yeso 3D (SELL YOUR HOUSE AS-IS)...');
   await page.waitForTimeout(2500);
 
-  console.log('🎬 [08s-14s] Reanudar scroll hacia la revelación del Logo Metálico 3D...');
-  await smoothScrollToHeroProgress(0.53, 5000);
-  console.log('⏸️ Pausa en el brillo del Logo 3D y destello de luz...');
-  await page.waitForTimeout(2200);
-
-  console.log('🎬 [14s-20s] Avanzando por los arcos hacia el muro de proceso (Acto 3)...');
-  await smoothScrollToHeroProgress(0.89, 5200);
+  console.log('🎬 [09s-16s] Avanzando por los arcos hacia el muro de proceso (Acto 2)...');
+  await smoothScrollToHeroProgress(0.89, 5600);
   console.log('⏸️ Pausa en la pared de proceso de 4 pasos...');
-  await page.waitForTimeout(2200);
+  await page.waitForTimeout(2500);
 
-  console.log('🎬 [20s-26s] Desanclaje diurno hacia el cuerpo de la web (Trust Strip + Oferta)...');
+  console.log('🎬 [16s-22s] Desanclaje diurno hacia el cuerpo de la web (Trust Strip + Oferta)...');
   await smoothScrollToHeroProgress(1.00, 3500);
   await page.waitForTimeout(1000);
 

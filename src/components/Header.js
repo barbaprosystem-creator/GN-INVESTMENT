@@ -24,9 +24,9 @@ export function renderHeader() {
         <!-- Header Actions (Call, Admin Portal & Get Offer) -->
         <div class="flex items-center gap-2 sm:gap-2.5">
           <a 
-            href="tel:5024903131" 
+            href="tel:5023843357" 
             class="w-8.5 h-8.5 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 border border-black/10 text-[#111315] shadow-xs hover:scale-105 active:scale-95 transition-transform shrink-0" 
-            title="Call (502) 490-3131"
+            title="Call (502) 384-3357"
           >
             <span class="material-symbols-outlined text-[17px] sm:text-[20px]">call</span>
           </a>
@@ -81,11 +81,11 @@ export function renderHeader() {
               <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
             </a>
             <a 
-              href="tel:5024903131" 
+              href="tel:5023843357" 
               class="py-2 text-center text-xs font-bold text-ink hover:text-copper flex items-center justify-center gap-2"
             >
               <span class="material-symbols-outlined text-[16px] text-copper">call</span>
-              <span>Call (502) 490-3131</span>
+              <span>Call (502) 384-3357</span>
             </a>
           </div>
         </div>

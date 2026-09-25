@@ -34,4 +34,9 @@ dist-ssr/
 .agents/
 skills-lock.json
 recordings/
+*.pdf
+factura_dame_la_letra.html
+scripts/*invoice*
+scripts/extracted_invoice.txt
+public/frames/desktop_backup_raw/
 

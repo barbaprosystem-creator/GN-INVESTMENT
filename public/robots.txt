@@ -4,4 +4,4 @@ Disallow: /login
 Disallow: /portal
 Disallow: /portal/*
 
-Sitemap: https://gninvestmentky.com/sitemap.xml
+Sitemap: https://gninvestmentsky.com/sitemap.xml

@@ -121,11 +121,11 @@ function renderQuickOfferModal() {
 
         <div class="flex flex-col gap-2.5 w-full mt-3">
           <a 
-            href="tel:5024903131" 
+            href="tel:5023843357" 
             class="btn-copper py-3.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-subtle"
           >
             <span class="material-symbols-outlined text-[16px]">call</span>
-            <span>Call Now: (502) 490-3131</span>
+            <span>Call Now: (502) 384-3357</span>
           </a>
           <button 
             type="button" 

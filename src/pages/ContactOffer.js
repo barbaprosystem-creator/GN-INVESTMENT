@@ -55,12 +55,12 @@ export function renderContactOfferPage() {
           </div>
 
           <a 
-            href="tel:5024903131" 
+            href="tel:5023843357" 
             data-location="dedicated_offer_call"
             class="btn-secondary text-xs sm:text-sm font-bold w-full sm:w-auto px-5 py-2.5"
           >
             <span class="material-symbols-outlined text-[16px] text-copper">call</span>
-            <span>Call (502) 490-3131</span>
+            <span>Call (502) 384-3357</span>
           </a>
         </div>
 

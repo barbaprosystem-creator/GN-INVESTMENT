@@ -42,9 +42,9 @@ export function renderFloatingDock() {
     },
     {
       id: "call",
-      label: "(502) 490-3131",
+      label: "(502) 384-3357",
       icon: "call",
-      href: "tel:5024903131",
+      href: "tel:5023843357",
       nav: null,
       isPrimary: false,
       isPhone: true

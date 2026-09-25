@@ -70,12 +70,12 @@ export function renderFaqAccordion() {
             <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
           </a>
           <a 
-            href="tel:5024903131" 
+            href="tel:5023843357" 
             data-location="faq_accordion"
             class="btn-secondary w-full sm:w-auto px-6 py-3"
           >
             <span class="material-symbols-outlined text-[18px] text-copper">call</span>
-            <span>Call (502) 490-3131</span>
+            <span>Call (502) 384-3357</span>
           </a>
         </div>
       </div>

@@ -205,12 +205,12 @@ export function renderHomePage() {
                 <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
               </a>
               <a 
-                href="tel:5024903131" 
+                href="tel:5023843357" 
                 data-location="situations_section"
                 class="btn-secondary w-full sm:w-auto px-5 py-3 text-xs sm:text-sm"
               >
                 <span class="material-symbols-outlined text-[17px] text-copper">call</span>
-                <span>(502) 490-3131</span>
+                <span>(502) 384-3357</span>
               </a>
             </div>
           </div>
@@ -360,12 +360,12 @@ export function renderHomePage() {
             </a>
 
             <a 
-              href="tel:5024903131" 
+              href="tel:5023843357" 
               data-location="final_cta_banner"
               class="btn-secondary bg-white/10 hover:bg-white/20 text-white border-white/20 w-full sm:w-auto px-6 py-3.5 text-sm font-semibold"
             >
               <span class="material-symbols-outlined text-[18px] text-soft-copper">call</span>
-              <span>Call (502) 490-3131</span>
+              <span>Call (502) 384-3357</span>
             </a>
           </div>
 
